@@ -37,7 +37,7 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/jinchuntan/portfolio.git
+git clone [https://github.com/jinchuntan/portfolio.git](https://github.com/jinchuntan/Portfolio.git)
 ```
 
 2. Navigate to the project directory:
