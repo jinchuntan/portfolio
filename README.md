@@ -38,3 +38,30 @@ To run this project locally, follow these steps:
 
 ```bash
 git clone https://github.com/jinchuntan/portfolio.git
+
+2. Navigate to the project directory:
+cd your-repo-name
+
+3. Install dependencies:
+npm install
+
+4. Start the development server:
+npm start
+
+
+## Usage
+
+After installation, you can start the local development server by running `npm start`. The site will be available at `http://localhost:3000`. Explore the various sections to know more about the professional services offered.
+
+## Deployment
+
+This section should include instructions on how to deploy the project on a live system.
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/yourusername/your-repo-name/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/yourusername/your-repo-name/blob/main/LICENSE) file for details.
+
