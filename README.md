@@ -1,4 +1,3 @@
-# Portfolio
 # Professional Portfolio Website
 
 ## Table of Contents
