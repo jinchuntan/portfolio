@@ -403,6 +403,7 @@ article .icon {
   justify-content: center;
   gap: 0.5rem;
   margin: 1rem;
+  flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
 }
 
 .contact-info-container p {
