@@ -171,9 +171,11 @@ section {
 
 .section__pic-container {
   display: flex;
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
+  max-height: 400px; /* Use max-height instead of height */
+  max-width: 400px;  /* Use max-width instead of width */
+  margin: auto;
+  justify-content: center; /* Center image horizontally */
+  align-items: center; /* Center image vertically */
 }
 
 .section__text {
