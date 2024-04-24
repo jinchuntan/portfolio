@@ -406,15 +406,6 @@ article .icon {
   flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
 }
 
-@media (max-width: 100px) {
-  .contact-info-container {
-    flex-direction: column; /* Stack items vertically */
-  }
-
-  .contact-info-container > * {
-    flex: 0 0 100%; /* Force each item to take full width of the container */
-  }
-}
 
 .contact-info-container p {
   font-size: larger;
