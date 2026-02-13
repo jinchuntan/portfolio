@@ -16,6 +16,9 @@
   <body>
     <div id="loader" class="loader-container">
       <div class="loader">
+        <p class="welcome-kicker">Welcome</p>
+        <h2 class="welcome-title">Nigel Tan Portfolio</h2>
+        <p class="welcome-subtitle">Loading the full experience...</p>
         <div class="loader-ring"></div>
       </div>
     </div>
@@ -27,11 +30,11 @@
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#education">Education</a></li>
-          <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#certifications">Certifications</a></li>
           <li><a href="#achievements">Awards</a></li>
-          <li><a href="#recommendations">Recommendations</a></li>
+          <li><a href="#volunteering">Volunteering</a></li>
+          <li><a href="#skills">Skills</a></li>
         </ul>
       </nav>
       <nav id="hamburger-nav" class="nav nav-mobile">
@@ -45,14 +48,15 @@
           <a href="#about" onclick="toggleMenu()">About</a>
           <a href="#experience" onclick="toggleMenu()">Experience</a>
           <a href="#education" onclick="toggleMenu()">Education</a>
-          <a href="#skills" onclick="toggleMenu()">Skills</a>
           <a href="#projects" onclick="toggleMenu()">Projects</a>
           <a href="#certifications" onclick="toggleMenu()">Certifications</a>
           <a href="#achievements" onclick="toggleMenu()">Awards</a>
-          <a href="#recommendations" onclick="toggleMenu()">Recommendations</a>
+          <a href="#volunteering" onclick="toggleMenu()">Volunteering</a>
+          <a href="#skills" onclick="toggleMenu()">Skills</a>
         </div>
       </nav>
     </header>
+    <div id="scroll-progress" aria-hidden="true"></div>
 
     <main>
       <section id="profile" class="section hero">
@@ -71,8 +75,6 @@
               <a href="./assets/project-portfolio.pdf" target="_blank" rel="noopener" class="btn btn-outline">Portfolio PDF</a>
             </div>
             <div class="hero-contact">
-              <a href="tel:+601124215639">+60 11-24215639</a>
-              <span>·</span>
               <a href="https://tanjinchun.me" target="_blank" rel="noopener">tanjinchun.me</a>
             </div>
             <div class="socials-container">
@@ -81,6 +83,18 @@
               </a>
               <a href="https://github.com/jinchuntan" target="_blank" rel="noopener" aria-label="GitHub">
                 <img src="./assets/github.png" alt="GitHub" class="icon" />
+              </a>
+              <a href="https://www.projectmanagement.com/profile/tanjinchun/" target="_blank" rel="noopener" aria-label="PMI Profile">
+                <img src="./assets/pmi.ico" alt="PMI Profile" class="icon" />
+              </a>
+              <a href="https://www.credly.com/users/tanjinchun" target="_blank" rel="noopener" aria-label="Credly">
+                <img src="./assets/credly.ico" alt="Credly" class="icon" />
+              </a>
+              <a href="https://www.youtube.com/@jinchuntan" target="_blank" rel="noopener" aria-label="YouTube">
+                <img src="./assets/youtube.ico" alt="YouTube" class="icon" />
+              </a>
+              <a href="https://learn.microsoft.com/en-us/users/tanjinchun/" target="_blank" rel="noopener" aria-label="Microsoft Learn">
+                <img src="./assets/microsoft-learn.ico" alt="Microsoft Learn" class="icon" />
               </a>
             </div>
           </div>
@@ -97,11 +111,6 @@
               making me a well-rounded team player. I look forward to applying my skills and perspectives to contribute meaningfully to your
               team while fully realizing my potential.
             </p>
-            <div class="about-tags">
-              <span class="tag">English</span>
-              <span class="tag">Mandarin</span>
-              <span class="tag">Malay</span>
-            </div>
           </div>
         </div>
       </section>
@@ -247,93 +256,39 @@
         </div>
       </section>
 
-      <section id="skills" class="section reveal">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-tabs">
-          <button class="tab-btn active" data-tab="languages">Languages & HDL</button>
-          <button class="tab-btn" data-tab="tools">Tools</button>
-          <button class="tab-btn" data-tab="dev">Development</button>
-        </div>
-        <div class="skills-content">
-          <div id="languages" class="tab-pane active">
-            <div class="skill-tags">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">MATLAB</span>
-              <span class="skill-tag">C / C++</span>
-              <span class="skill-tag">C#</span>
-              <span class="skill-tag">Verilog</span>
-              <span class="skill-tag">SystemVerilog</span>
-              <span class="skill-tag">Assembly</span>
-              <span class="skill-tag">HTML</span>
-              <span class="skill-tag">CSS</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">R</span>
-            </div>
-          </div>
-          <div id="tools" class="tab-pane">
-            <div class="skill-tags">
-              <span class="skill-tag">Cadence Innovus</span>
-              <span class="skill-tag">Design Compiler</span>
-              <span class="skill-tag">PrimeTime</span>
-              <span class="skill-tag">ICC2</span>
-              <span class="skill-tag">ModelSim</span>
-              <span class="skill-tag">Quartus</span>
-              <span class="skill-tag">VCS</span>
-              <span class="skill-tag">PSoC</span>
-              <span class="skill-tag">FPGA</span>
-              <span class="skill-tag">PSS/E</span>
-              <span class="skill-tag">LTSpice</span>
-              <span class="skill-tag">Git</span>
-              <span class="skill-tag">TCL</span>
-              <span class="skill-tag">Linux</span>
-            </div>
-          </div>
-          <div id="dev" class="tab-pane">
-            <div class="skill-tags">
-              <span class="skill-tag">Jira</span>
-              <span class="skill-tag">Confluence</span>
-              <span class="skill-tag">BitBucket</span>
-              <span class="skill-tag">BlackDuck</span>
-              <span class="skill-tag">Scrum</span>
-              <span class="skill-tag">Agile</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section id="projects" class="section reveal">
         <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
           <article class="project-card">
-            <span class="project-badge">Outstanding Achievement 2024</span>
-            <h3>IC Physical Design Project</h3>
-            <p>Led team of 5 in design and optimization of integrated circuits. Achieved timing closure, zero violations.</p>
+            <span class="project-badge">Featured on YouTube</span>
+            <h3>FPGA Projects with Go Board</h3>
+            <p>Showcase of FPGA concepts and practical implementations, from beginner foundations to advanced project work.</p>
             <div class="project-actions">
-              <a href="./assets/resume-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small btn-primary">Details</a>
+              <a href="https://www.youtube.com/watch?v=3uH4SyLG3Eg" target="_blank" rel="noopener" class="btn btn-small btn-primary">Watch Video</a>
             </div>
           </article>
           <article class="project-card">
-            <span class="project-badge">First Runner-Up · Q1 Journal Under Review</span>
-            <h3>On-Load Tap Changer Transformer Simulation</h3>
-            <p>Designed real-time simulation model using Typhoon HIL. First runner-up Video Competition.</p>
+            <span class="project-badge">Featured on YouTube</span>
+            <h3>WOC7020 Final Project Demo</h3>
+            <p>Capstone-style group demo presenting implementation approach, technical decisions and final system outcomes.</p>
             <div class="project-actions">
-              <a href="./assets/resume-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small btn-primary">Details</a>
+              <a href="https://www.youtube.com/watch?v=kVOL0wtlGrk" target="_blank" rel="noopener" class="btn btn-small btn-primary">Watch Video</a>
             </div>
           </article>
           <article class="project-card">
-            <span class="project-badge">Q1 Journal Under Review</span>
-            <h3>State Estimation for Voltage Control</h3>
-            <p>Analyzed AI-driven state estimation in renewable energy networks. Renewable & Sustainable Energy Reviews.</p>
+            <span class="project-badge">Competition Demo</span>
+            <h3>ECE4191 Monash Bowl Preliminary</h3>
+            <p>Engineering competition demonstration focused on problem solving, rapid prototyping and team execution.</p>
             <div class="project-actions">
-              <a href="./assets/resume-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small btn-primary">Details</a>
+              <a href="https://www.youtube.com/watch?v=xpSjKW1Hx9s" target="_blank" rel="noopener" class="btn btn-small btn-primary">Watch Video</a>
             </div>
           </article>
           <article class="project-card">
-            <h3>Puck Picking Autonomous Robot</h3>
-            <p>Led cross-functional team of 4 in design and programming of self-sufficient robot for autonomous puck transport.</p>
+            <span class="project-badge">Featured on YouTube</span>
+            <h3>BLE Product Innovation Pitch</h3>
+            <p>Team presentation on Bluetooth Low Energy product strategy, technical feasibility, and commercialization narrative.</p>
             <div class="project-actions">
-              <a href="./assets/monashcup-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small">PDF</a>
-              <a href="https://youtu.be/hF5Xg1vLbbk" target="_blank" rel="noopener" class="btn btn-small btn-primary">Demo</a>
+              <a href="https://www.youtube.com/watch?v=GuYshE7-1Fs" target="_blank" rel="noopener" class="btn btn-small btn-primary">Watch Video</a>
             </div>
           </article>
           <article class="project-card">
@@ -345,24 +300,35 @@
             </div>
           </article>
           <article class="project-card">
-            <h3>Blob Statistics</h3>
+            <span class="project-badge">Featured on YouTube</span>
+            <h3>Power System Downsampling Analysis</h3>
+            <p>Technical presentation on downsampling workflow and signal-quality tradeoffs for engineering datasets.</p>
             <div class="project-actions">
-              <a href="./assets/blobstatistics-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small">PDF</a>
-              <a href="https://www.youtube.com/watch?v=Lr9qHEhf-sE" target="_blank" rel="noopener" class="btn btn-small btn-primary">Demo</a>
+              <a href="https://www.youtube.com/watch?v=q0fpr-3_98Q" target="_blank" rel="noopener" class="btn btn-small btn-primary">Watch Video</a>
             </div>
           </article>
           <article class="project-card">
-            <h3>Bar Code</h3>
+            <span class="project-badge">Featured on YouTube</span>
+            <h3>Electrical Systems Lab Demonstration</h3>
+            <p>Hands-on demonstration video highlighting practical system behavior, testing method and engineering interpretation.</p>
             <div class="project-actions">
-              <a href="./assets/barcode-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small">PDF</a>
-              <a href="https://www.youtube.com/watch?v=cHtepzf0Grg" target="_blank" rel="noopener" class="btn btn-small btn-primary">Demo</a>
+              <a href="https://www.youtube.com/watch?v=o5leowb9M5g" target="_blank" rel="noopener" class="btn btn-small btn-primary">Watch Video</a>
             </div>
           </article>
           <article class="project-card">
-            <h3>Piano Synthesizer</h3>
+            <span class="project-badge">Featured on YouTube</span>
+            <h3>Smart Sensor Lab: RedBoard + Arduino</h3>
+            <p>Sensor instrumentation project focused on photoresistor input handling and embedded prototype validation.</p>
             <div class="project-actions">
-              <a href="./assets/pianosynthesizer-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small">PDF</a>
-              <a href="https://www.youtube.com/watch?v=gyYTnPOkHJs" target="_blank" rel="noopener" class="btn btn-small btn-primary">Demo</a>
+              <a href="https://www.youtube.com/watch?v=jPP7KQvIyxg" target="_blank" rel="noopener" class="btn btn-small btn-primary">Watch Video</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <span class="project-badge">Featured on YouTube</span>
+            <h3>Servo Control with Embedded Systems</h3>
+            <p>Demonstration of actuator control logic and system responsiveness for hardware-software integration tasks.</p>
+            <div class="project-actions">
+              <a href="https://www.youtube.com/watch?v=zQVKZpzg49c" target="_blank" rel="noopener" class="btn btn-small btn-primary">Watch Video</a>
             </div>
           </article>
         </div>
@@ -370,54 +336,69 @@
 
       <section id="certifications" class="section reveal">
         <h2 class="section-title">Certifications</h2>
-        <p class="section-subtitle">Most recent first · Verified links · <a href="https://www.linkedin.com/in/tanjinchun/details/certifications/" target="_blank" rel="noopener">View all on LinkedIn</a> · <a href="https://www.credly.com/users/tanjinchun" target="_blank" rel="noopener">Credly</a></p>
+        <p class="section-subtitle">Selected recent certifications. Full list on <a href="https://www.linkedin.com/in/tanjinchun/details/certifications/" target="_blank" rel="noopener">LinkedIn</a> and <a href="https://www.credly.com/users/tanjinchun" target="_blank" rel="noopener">Credly</a>.</p>
         <div class="certifications-grid">
-          <a href="https://coursera.org/share/edcd9d1764fadc44afd45b92f73493ff" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">Google</span>
-            <h4>Google IT Support</h4>
-            <span class="cert-date">Nov 2022</span>
-          </a>
-          <a href="https://coursera.org/share/6181c7de77abe008b0760713cff4a8fe" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">Vanderbilt University</span>
-            <h4>MATLAB Programming for Engineers and Scientists</h4>
-            <span class="cert-date">Jun 2022</span>
-          </a>
-          <a href="https://coursera.org/share/4d3acd601ec0697baa2438c28c99eadd" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">Google</span>
-            <h4>Google Data Analytics</h4>
-            <span class="cert-date">Oct 2021</span>
-          </a>
-          <a href="https://coursera.org/share/ee1608cc159df408b5759de01848238f" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">Google</span>
-            <h4>Google Project Management</h4>
-            <span class="cert-date">Aug 2021</span>
-          </a>
-          <a href="https://coursera.org/share/cbd99c4b3018300ad6ec73d46ff23eff" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">University of Michigan</span>
-            <h4>Web Design for Everybody: Basics of Web Development & Coding</h4>
-            <span class="cert-date">Jun 2021</span>
-          </a>
-          <a href="https://credly.com/badges/55eec759-2c47-448e-b866-0b4bf5a83e6c/public_url" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">IBM</span>
-            <h4>Artificial Intelligence Foundations Specialization</h4>
-            <span class="cert-date">Apr 2021</span>
-          </a>
-          <a href="https://credly.com/badges/8cbfcf20-b8de-4bd5-ac70-17f8b69d9a9b/public_url" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">IBM</span>
-            <h4>IBM AI Foundations for Business Specialization</h4>
-            <span class="cert-date">Apr 2021</span>
-          </a>
-          <a href="https://coursera.org/share/f7e88b7f7d1ee586ae1f80d0dcee8f0b" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">IBM</span>
-            <h4>AI Foundation for Everyone</h4>
-            <span class="cert-date">Mar 2021</span>
-          </a>
-          <a href="https://www.engineersaustralia.org.au" target="_blank" rel="noopener" class="cert-card">
-            <span class="cert-issuer">Engineers Australia</span>
-            <h4>GradIEAust</h4>
-          </a>
+          <article class="cert-card">
+            <span class="cert-issuer">Project Destined</span>
+            <h4>Spring 2026 JLL Data Centers Workshop Series</h4>
+            <span class="cert-date">Issued Feb 2026</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">Project Management Institute</span>
+            <h4>Project Management Professional (PMP)</h4>
+            <span class="cert-date">Issued Jan 2026</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">Project Management Institute</span>
+            <h4>PMI Agile Certified Practitioner (PMI-ACP)</h4>
+            <span class="cert-date">Issued Jan 2026</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">SIDC</span>
+            <h4>Certified Capital Market Professional (CCMP) in Compliance 1</h4>
+            <span class="cert-date">Issued Dec 2025</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">Scrum.org</span>
+            <h4>Professional Scrum Master II (PSM II)</h4>
+            <span class="cert-date">Issued Nov 2025</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">Scrum.org</span>
+            <h4>Professional Scrum Product Owner II (PSPO II)</h4>
+            <span class="cert-date">Issued Nov 2025</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">Oracle</span>
+            <h4>Oracle Cloud Infrastructure 2025 Certified DevOps Professional</h4>
+            <span class="cert-date">Issued Nov 2025</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">Oracle</span>
+            <h4>Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</h4>
+            <span class="cert-date">Issued Oct 2025</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">The Council for Six Sigma Certification (CSSC)</span>
+            <h4>Six Sigma Black Belt (CSSBB)</h4>
+            <span class="cert-date">Issued Nov 2025</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">Microsoft</span>
+            <h4>Microsoft Certified: Azure AI Engineer Associate</h4>
+            <span class="cert-date">Issued Jun 2025 | Expires Jul 2026</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">NVIDIA</span>
+            <h4>Generative AI with Diffusion Models</h4>
+            <span class="cert-date">Issued Nov 2025</span>
+          </article>
+          <article class="cert-card">
+            <span class="cert-issuer">Oracle</span>
+            <h4>Oracle Cloud Infrastructure 2025 Certified Multicloud Architect Professional</h4>
+            <span class="cert-date">Issued Nov 2025</span>
+          </article>
         </div>
-        <p class="cert-note">New 2026 certifications? Add them to your <a href="https://www.linkedin.com/in/tanjinchun/details/certifications/" target="_blank" rel="noopener">LinkedIn</a> and they’ll be visible here on the next update.</p>
       </section>
 
       <section id="achievements" class="section reveal">
@@ -465,6 +446,157 @@
           </div>
         </div>
       </section>
+
+      <section id="volunteering" class="section reveal">
+        <h2 class="section-title">Volunteering</h2>
+        <p class="section-subtitle">Selected leadership and social impact work. Full list on <a href="https://www.linkedin.com/in/tanjinchun/details/volunteering-experiences/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+        <div class="volunteer-grid">
+          <article class="volunteer-card">
+            <span class="volunteer-date">Nov 2025 - Present</span>
+            <h3>Ambassador</h3>
+            <p class="volunteer-org">Democratising Education for Global Sustainability and Justice (DemEd Global)</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Apr 2025 - Present</span>
+            <h3>Mentor</h3>
+            <p class="volunteer-org">Tunku Abdul Rahman Foundation</p>
+            <p class="volunteer-focus">Education</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Apr 2025 - Present</span>
+            <h3>Mentor</h3>
+            <p class="volunteer-org">Monash University</p>
+            <p class="volunteer-focus">Science and Technology</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Nov 2025 - Present</span>
+            <h3>Mentor</h3>
+            <p class="volunteer-org">The Southeast Asia Exchange</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Sep 2025 - Dec 2025</span>
+            <h3>Impact and Partnership Manager</h3>
+            <p class="volunteer-org">ASEAN Youth Organization</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Oct 2025 - Dec 2025</span>
+            <h3>Youth in Energy</h3>
+            <p class="volunteer-org">Youth for Energy Southeast Asia (Y4E-SEA)</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">May 2025 - Nov 2025</span>
+            <h3>Lead Campaign Manager</h3>
+            <p class="volunteer-org">Gibbon Conservation Society</p>
+            <p class="volunteer-focus">Animal Welfare</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Jul 2025 - Oct 2025</span>
+            <h3>Axiata Digital Leaders Program</h3>
+            <p class="volunteer-org">Axiata Young Talent Programme</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Apr 2025 - Present</span>
+            <h3>Climate Catalysts Mentorship Programme 2.0</h3>
+            <p class="volunteer-org">UNDP</p>
+            <p class="volunteer-focus">Science and Technology</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Apr 2025 - Jun 2025</span>
+            <h3>Lead Consultant</h3>
+            <p class="volunteer-org">The Malaysian SOCIAL Project</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Apr 2025</span>
+            <h3>Volunteer</h3>
+            <p class="volunteer-org">Climate Governance Malaysia</p>
+            <p class="volunteer-focus">Economic Empowerment</p>
+          </article>
+          <article class="volunteer-card">
+            <span class="volunteer-date">Mar 2025</span>
+            <h3>Deloitte x Monash Volunteer</h3>
+            <p class="volunteer-org">Engineers Without Borders Malaysia</p>
+            <p class="volunteer-focus">Science and Technology</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills" class="section reveal">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-tabs">
+          <button class="tab-btn active" data-tab="languages">Languages & HDL</button>
+          <button class="tab-btn" data-tab="tools">Tools & Platforms</button>
+          <button class="tab-btn" data-tab="dev">Engineering & Delivery</button>
+        </div>
+        <div class="skills-content">
+          <div id="languages" class="tab-pane active">
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">MATLAB</span>
+              <span class="skill-tag">C / C++</span>
+              <span class="skill-tag">C#</span>
+              <span class="skill-tag">Verilog</span>
+              <span class="skill-tag">SystemVerilog</span>
+              <span class="skill-tag">Assembly</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">Bash</span>
+              <span class="skill-tag">TCL</span>
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">R</span>
+            </div>
+          </div>
+          <div id="tools" class="tab-pane">
+            <div class="skill-tags">
+              <span class="skill-tag">Cadence Innovus</span>
+              <span class="skill-tag">Design Compiler</span>
+              <span class="skill-tag">PrimeTime</span>
+              <span class="skill-tag">ICC2</span>
+              <span class="skill-tag">Static Timing Analysis (STA)</span>
+              <span class="skill-tag">Clock Tree Synthesis (CTS)</span>
+              <span class="skill-tag">Timing Closure</span>
+              <span class="skill-tag">Floorplanning</span>
+              <span class="skill-tag">Place and Route</span>
+              <span class="skill-tag">Physical Verification</span>
+              <span class="skill-tag">DRC/LVS</span>
+              <span class="skill-tag">EM/IR Analysis</span>
+              <span class="skill-tag">Power Intent (UPF)</span>
+              <span class="skill-tag">GDSII Signoff Flow</span>
+              <span class="skill-tag">RISC-V SoC Implementation</span>
+              <span class="skill-tag">ModelSim</span>
+              <span class="skill-tag">Quartus</span>
+              <span class="skill-tag">VCS</span>
+              <span class="skill-tag">Typhoon HIL</span>
+              <span class="skill-tag">Arduino IDE</span>
+              <span class="skill-tag">PSoC</span>
+              <span class="skill-tag">FPGA</span>
+              <span class="skill-tag">PSS/E</span>
+              <span class="skill-tag">LTSpice</span>
+              <span class="skill-tag">Azure</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Oracle Cloud Infrastructure</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Linux</span>
+            </div>
+          </div>
+          <div id="dev" class="tab-pane">
+            <div class="skill-tags">
+              <span class="skill-tag">Machine Learning</span>
+              <span class="skill-tag">Data Analytics</span>
+              <span class="skill-tag">Power BI</span>
+              <span class="skill-tag">Technical Consulting</span>
+              <span class="skill-tag">Project Management</span>
+              <span class="skill-tag">Agile Delivery</span>
+              <span class="skill-tag">Scrum</span>
+              <span class="skill-tag">Jira</span>
+              <span class="skill-tag">Confluence</span>
+              <span class="skill-tag">BitBucket</span>
+              <span class="skill-tag">Stakeholder Management</span>
+              <span class="skill-tag">Risk Management</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">
@@ -482,9 +614,6 @@
           <a href="mailto:nigeltanjc@gmail.com" aria-label="Email">
             <img src="./assets/email.png" alt="Email" class="icon" />
           </a>
-          <a href="tel:+601124215639" aria-label="Phone">
-            <img src="./assets/phone.png" alt="Phone" class="icon" />
-          </a>
         </div>
         <p class="footer-copyright">© 2025 Nigel Tan Jin Chun. All rights reserved.</p>
       </div>
@@ -493,3 +622,7 @@
     <script src="script.js"></script>
   </body>
 </html>
+
+
+
+

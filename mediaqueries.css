@@ -28,9 +28,25 @@
 }
 
 @media screen and (max-width: 992px) {
+  #scroll-progress {
+    height: 2px;
+  }
+
   .hero-content {
     flex-direction: column;
     text-align: center;
+  }
+
+  .hero::before {
+    width: 220px;
+    height: 220px;
+    left: -80px;
+  }
+
+  .hero::after {
+    width: 180px;
+    height: 180px;
+    right: -60px;
   }
 
   .section__text {
@@ -48,6 +64,11 @@
 
   .socials-container {
     justify-content: center;
+  }
+
+  .socials-container a {
+    width: 42px;
+    height: 42px;
   }
 
   .section__pic-container {
@@ -120,7 +141,10 @@
   .about-card,
   .timeline-content,
   .education-card,
-  .achievement-card {
+  .achievement-card,
+  .project-card,
+  .cert-card,
+  .volunteer-card {
     padding: 1.5rem;
   }
 
@@ -143,6 +167,10 @@
   .certifications-grid {
     grid-template-columns: 1fr;
   }
+
+  .volunteer-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -162,6 +190,11 @@
     padding-top: 5rem;
   }
 
+  .hero::before,
+  .hero::after {
+    opacity: 0.65;
+  }
+
   .title {
     font-size: 1.875rem;
   }
@@ -173,6 +206,29 @@
 
   .hero-contact {
     flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .socials-container {
+    gap: 0.65rem;
+  }
+
+  .socials-container a {
+    width: 38px;
+    height: 38px;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .loader {
+    padding: 1.4rem 1rem 1.2rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.9rem;
   }
 
   .footer {
