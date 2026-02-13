@@ -4,259 +4,492 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <link rel="icon" type="image/png" href="./assets/favicon.ico">
+    <meta name="description" content="Nigel Tan Jin Chun - Physical Design Engineer & Data Science Student | Engineering & Consulting Portfolio" />
+    <title>Nigel Tan | Engineer & Data Scientist</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
-    <!-- Loader -->
     <div id="loader" class="loader-container">
-      <div class="loader"></div>
+      <div class="loader">
+        <div class="loader-ring"></div>
+      </div>
     </div>
-    <nav id="desktop-nav">
-      <div class="logo"></div>
-      <div>
+
+    <header class="header">
+      <nav id="desktop-nav" class="nav">
+        <a href="#" class="logo">NJ</a>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#education">Education</a></li>
+          <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#achievements">Awards</a></li>
+          <li><a href="#recommendations">Recommendations</a></li>
         </ul>
-      </div>
-    </nav>
-    <nav id="hamburger-nav">
-      <div class="logo">Tan Jin Chun (Nigel)</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
+      </nav>
+      <nav id="hamburger-nav" class="nav nav-mobile">
+        <a href="#" class="logo">NJ</a>
+        <button class="hamburger-icon" onclick="toggleMenu()" aria-label="Toggle menu">
           <span></span>
           <span></span>
           <span></span>
-        </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-          <li><a href="#education" onclick="toggleMenu()">Education</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-        </div>
-      </div>
-    </nav>
-    <section id="profile">
-      <div class="section__pic-container">
-        <img src="./assets/personal-pic.png" alt="Jin Chun profile picture"/>
-      </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hi there, I'm</p>
-        <h1 class="title">Tan Jin Chun (Nigel)</h1>
-        <p class="section__text__p2">Electrical and Computer System Engineer</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/resume-pdf.pdf')"
-          >
-            Résumé
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='mailto:nigeltanjc@gmail.com'">
-            Contact Me!
-          </button>
-          <button
-          class="btn btn-color-2"
-          onclick="window.open('./assets/project-portfolio.pdf')"
-        >
-          Portfolio
         </button>
-        </div>
-        <div id="socials-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            onclick="location.href='https://www.linkedin.com/in/tanjinchun/'"
-          />
-          <img
-            src="./assets/github.png"
-            alt="My Github profile"
-            class="icon"
-            onclick="location.href='https://github.com/jinchuntan'"
-          />
-        </div>
-      </div>
-    </section>
-    <section id="about">
-      <h1 class="title">About Me</h1>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <p>
-                As a final year Electrical and Computer System Engineering student at Monash University Malaysia, 
-                I have a deep interest in creating impactful software and hardware solutions. 
-                My curiosity extends beyond my main discipline, making me a well-rounded team player. 
-                I'm looking forward to using these skills and perspective to contribute to your team while fully realizing my potential.
-              </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="experience">
-      <h1 class="title">Experience</h1>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/experience.png"
-                alt="Experience icon"
-                class="icon"
-              />
-              <h3>Experience</h3>
-              <ul>
-                <p>Monash TeaMWork | Virtual Intern</p><br>
-                <p>Keysight Malaysia | R&D Firmware Intern</p><br>
-                <p>Sunway XFarms | Senior Apprentice</p><br>
-                <p>Virtual Work Experience</p>
-              </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="education">
-      <h1 class="title">Education</h1>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <ul>
-                <p>Bachelor of Electrical and Computer Systems Engineering (Honours) | Monash University Malaysia</p><br>
-                <p>Cadet | 42 Kuala Lumpur by Sunway Education Group</p><br>
-                <p>Cambridge GCE A-Levels | Sunway College</p><br>
-                <p>SPM (Sijil Pelajaran Malaysia) | SMK Seafield</p>
-              </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="projects">
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <h2 class="experience-sub-title project-title">Blob Statistics</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('./assets/blobstatistics-pdf.pdf')"
-              >
-                PDF
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://www.youtube.com/watch?v=Lr9qHEhf-sE'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <h2 class="experience-sub-title project-title">Bar Code</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('./assets/barcode-pdf.pdf')"
-              >
-                PDF
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://www.youtube.com/watch?v=cHtepzf0Grg'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <h2 class="experience-sub-title project-title">Monash Cup Bowl 2023</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('./assets/monashcup-pdf.pdf')"
-              >
-                PDF
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://youtu.be/hF5Xg1vLbbk'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <h2 class="experience-sub-title project-title">Piano Synthesizer</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="window.open('./assets/pianosynthesizer-pdf.pdf')"
-              >
-                PDF
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://www.youtube.com/watch?v=gyYTnPOkHJs'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">     
-              <div class="contact-info-container">
-              <a href="https://www.linkedin.com/in/tanjinchun/">
-              <img
-                src="./assets/linkedin.png"
-                alt="LinkedIn icon"
-                class="icon contact-icon"
-              />
-              </a>
-              </div>     
-              <div class="contact-info-container">
-                <a href="mailto:nigeltanjc@gmail.com">
-                <img
-                src="./assets/email.png"
-                alt="Email icon"
-                class="icon contact-icon email-icon"
-                />
-                </a>
-              </div>    
-              <div class="contact-info-container">
-                <a href="tel:+601124215639">
-                <img 
-                src="./assets/phone.png" 
-                alt="Phone icon" 
-                class="icon contact-icon phone-icon" 
-                />
-              </a>
-              </div>
-          </ul>
+        <div class="menu-links" id="menu-links">
+          <a href="#about" onclick="toggleMenu()">About</a>
+          <a href="#experience" onclick="toggleMenu()">Experience</a>
+          <a href="#education" onclick="toggleMenu()">Education</a>
+          <a href="#skills" onclick="toggleMenu()">Skills</a>
+          <a href="#projects" onclick="toggleMenu()">Projects</a>
+          <a href="#certifications" onclick="toggleMenu()">Certifications</a>
+          <a href="#achievements" onclick="toggleMenu()">Awards</a>
+          <a href="#recommendations" onclick="toggleMenu()">Recommendations</a>
         </div>
       </nav>
-      <p>Copyright &#169; 2024 Tan Jin Chun. All Rights Reserved.</p>
+    </header>
+
+    <main>
+      <section id="profile" class="section hero">
+        <div class="hero-content">
+          <div class="section__pic-container">
+            <img src="./assets/personal-pic.png" alt="Nigel Tan - Profile" />
+          </div>
+          <div class="section__text">
+            <p class="section__text__p1">Hi, I'm</p>
+            <h1 class="title">Nigel Tan<span class="accent">.</span></h1>
+            <p class="section__text__p2">Physical Design Engineer · Master of Data Science & Applied Computing</p>
+            <p class="section__text__p3">Building impactful software, hardware & semiconductor solutions</p>
+            <div class="btn-container">
+              <a href="./assets/resume-pdf.pdf" target="_blank" rel="noopener" class="btn btn-primary">View Résumé</a>
+              <a href="mailto:nigeltanjc@gmail.com" class="btn btn-secondary">Get in Touch</a>
+              <a href="./assets/project-portfolio.pdf" target="_blank" rel="noopener" class="btn btn-outline">Portfolio PDF</a>
+            </div>
+            <div class="hero-contact">
+              <a href="tel:+601124215639">+60 11-24215639</a>
+              <span>·</span>
+              <a href="https://tanjinchun.me" target="_blank" rel="noopener">tanjinchun.me</a>
+            </div>
+            <div class="socials-container">
+              <a href="https://www.linkedin.com/in/tanjinchun/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <img src="./assets/linkedin.png" alt="LinkedIn" class="icon" />
+              </a>
+              <a href="https://github.com/jinchuntan" target="_blank" rel="noopener" aria-label="GitHub">
+                <img src="./assets/github.png" alt="GitHub" class="icon" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section reveal">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-card">
+            <p>
+              As a postgraduate data science student and recent graduate of Electrical and Computer Systems Engineering at Monash University,
+              I have a deep interest in creating impactful software and hardware solutions. My curiosity extends beyond my main discipline,
+              making me a well-rounded team player. I look forward to applying my skills and perspectives to contribute meaningfully to your
+              team while fully realizing my potential.
+            </p>
+            <div class="about-tags">
+              <span class="tag">English</span>
+              <span class="tag">Mandarin</span>
+              <span class="tag">Malay</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section reveal">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Dec 2025 – Present</span>
+              <h3>Physical Design Engineer</h3>
+              <p class="timeline-org">GreatAsic Technology · Greater Kuala Lumpur</p>
+              <ul>
+                <li>Engineering and technical specialist role</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Jun 2025 – Nov 2025</span>
+              <h3>Physical Design Engineer, Partition Lead</h3>
+              <p class="timeline-org">StarFive Technologies · Kuala Lumpur</p>
+              <ul>
+                <li>Led team in automating place-and-route flows using Cadence Innovus for RISC-V SoC designs</li>
+                <li>Optimized floorplanning, placement and routing to meet performance, power and area targets</li>
+                <li>Coordinated design verification and timing closure for successful tape-out</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Feb 2023 – Feb 2025</span>
+              <h3>Cadet</h3>
+              <p class="timeline-org">42 Kuala Lumpur & 42 Paris · 2 years</p>
+              <ul>
+                <li>Ecole Core Programme, Piscine (Level 10)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">May 2025</span>
+              <h3>Lead Consultant</h3>
+              <p class="timeline-org">Force of Nature · London, UK</p>
+              <ul>
+                <li>Led 7-member consulting team to identify youth climate skill gaps and design three new training pathways</li>
+                <li>Designed delivery models and partnership strategies to optimise program reach</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Apr – Jun 2025</span>
+              <h3>Lead Consultant</h3>
+              <p class="timeline-org">The Malaysian SOCIAL Project – IDEAS Autism Centre · Kuala Lumpur</p>
+              <ul>
+                <li>Led 5-member team developing impact measurement and reporting toolkit for national autism center</li>
+                <li>Collaborated with Kearney mentor to refine consulting methodologies</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Jun – Jul 2024</span>
+              <h3>Lead Consultant</h3>
+              <p class="timeline-org">SLN Sustainability Ltd · Coventry, UK</p>
+              <ul>
+                <li>Led 6-member team developing omnichannel marketing strategy for sustainable children's water bottle</li>
+                <li>Applied technical skills in software development and data management for content optimization</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Nov 2023 – Feb 2024</span>
+              <h3>R&D Firmware Engineer Intern</h3>
+              <p class="timeline-org">Keysight Technologies · Penang</p>
+              <ul>
+                <li>Led upgrade of CLLC converter control systems, migrating code to newer MCU</li>
+                <li>Developed and IEC61010 compliance tested new DAQ card</li>
+                <li>Standardized calibration process for Arbitrary Waveform Generator</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="section reveal">
+        <h2 class="section-title">Education</h2>
+        <div class="education-grid">
+          <div class="education-card">
+            <span class="edu-date">2025 – Present</span>
+            <h3>Master of Data Science</h3>
+            <p>Monash University</p>
+          </div>
+          <div class="education-card">
+            <span class="edu-date">2025 – Present</span>
+            <h3>Master of Applied Computing (Mixed Mode)</h3>
+            <p>University of Malaya</p>
+          </div>
+          <div class="education-card">
+            <span class="edu-date">Nov 2020 – Dec 2024</span>
+            <h3>Bachelor of Electrical and Computer Systems Engineering (Honours)</h3>
+            <p>Monash University Malaysia · Subang Jaya</p>
+          </div>
+          <div class="education-card">
+            <span class="edu-date">2024 – 2025</span>
+            <h3>National Semiconductor Excellence Program</h3>
+            <p>ASEM - Advanced Semiconductor Academy of Malaysia · Cyberjaya</p>
+          </div>
+          <div class="education-card">
+            <span class="edu-date">2024 – 2025</span>
+            <h3>IC Design Workshop (Introductory)</h3>
+            <p>ASEM - Advanced Semiconductor Academy of Malaysia · Cyberjaya</p>
+          </div>
+          <div class="education-card">
+            <span class="edu-date">42 Ecole Core Programme · Level 10</span>
+            <h3>Piscine</h3>
+            <p>42 Kuala Lumpur · Subang Jaya</p>
+          </div>
+          <div class="education-card">
+            <span class="edu-date">Summer School</span>
+            <h3>Intergenerational Justice</h3>
+            <p>University of Cologne</p>
+          </div>
+          <div class="education-card">
+            <span class="edu-date">Summer School</span>
+            <h3>Artificial Intelligence & Cybersecurity</h3>
+            <p>University of Turku, Finland</p>
+          </div>
+          <div class="education-card">
+            <span class="edu-date">Mar 2019 – Aug 2020</span>
+            <h3>Cambridge GCE A-Levels — 4A*</h3>
+            <p>Sunway College · Bandar Sunway · Mathematics, Physics, Chemistry, Economics</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section reveal">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-tabs">
+          <button class="tab-btn active" data-tab="languages">Languages & HDL</button>
+          <button class="tab-btn" data-tab="tools">Tools</button>
+          <button class="tab-btn" data-tab="dev">Development</button>
+        </div>
+        <div class="skills-content">
+          <div id="languages" class="tab-pane active">
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">MATLAB</span>
+              <span class="skill-tag">C / C++</span>
+              <span class="skill-tag">C#</span>
+              <span class="skill-tag">Verilog</span>
+              <span class="skill-tag">SystemVerilog</span>
+              <span class="skill-tag">Assembly</span>
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">R</span>
+            </div>
+          </div>
+          <div id="tools" class="tab-pane">
+            <div class="skill-tags">
+              <span class="skill-tag">Cadence Innovus</span>
+              <span class="skill-tag">Design Compiler</span>
+              <span class="skill-tag">PrimeTime</span>
+              <span class="skill-tag">ICC2</span>
+              <span class="skill-tag">ModelSim</span>
+              <span class="skill-tag">Quartus</span>
+              <span class="skill-tag">VCS</span>
+              <span class="skill-tag">PSoC</span>
+              <span class="skill-tag">FPGA</span>
+              <span class="skill-tag">PSS/E</span>
+              <span class="skill-tag">LTSpice</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">TCL</span>
+              <span class="skill-tag">Linux</span>
+            </div>
+          </div>
+          <div id="dev" class="tab-pane">
+            <div class="skill-tags">
+              <span class="skill-tag">Jira</span>
+              <span class="skill-tag">Confluence</span>
+              <span class="skill-tag">BitBucket</span>
+              <span class="skill-tag">BlackDuck</span>
+              <span class="skill-tag">Scrum</span>
+              <span class="skill-tag">Agile</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section reveal">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <span class="project-badge">Outstanding Achievement 2024</span>
+            <h3>IC Physical Design Project</h3>
+            <p>Led team of 5 in design and optimization of integrated circuits. Achieved timing closure, zero violations.</p>
+            <div class="project-actions">
+              <a href="./assets/resume-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small btn-primary">Details</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <span class="project-badge">First Runner-Up · Q1 Journal Under Review</span>
+            <h3>On-Load Tap Changer Transformer Simulation</h3>
+            <p>Designed real-time simulation model using Typhoon HIL. First runner-up Video Competition.</p>
+            <div class="project-actions">
+              <a href="./assets/resume-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small btn-primary">Details</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <span class="project-badge">Q1 Journal Under Review</span>
+            <h3>State Estimation for Voltage Control</h3>
+            <p>Analyzed AI-driven state estimation in renewable energy networks. Renewable & Sustainable Energy Reviews.</p>
+            <div class="project-actions">
+              <a href="./assets/resume-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small btn-primary">Details</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <h3>Puck Picking Autonomous Robot</h3>
+            <p>Led cross-functional team of 4 in design and programming of self-sufficient robot for autonomous puck transport.</p>
+            <div class="project-actions">
+              <a href="./assets/monashcup-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small">PDF</a>
+              <a href="https://youtu.be/hF5Xg1vLbbk" target="_blank" rel="noopener" class="btn btn-small btn-primary">Demo</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <span class="project-badge">James Dyson Award Nominee</span>
+            <h3>Hybrid Solar Lighting System</h3>
+            <p>Pioneered solar hybrid lighting using Kanawa-Tsugi concept. Springwise Article feature.</p>
+            <div class="project-actions">
+              <a href="https://springwise.com/innovation/agriculture-energy/hybrid-solar-lighting-system" target="_blank" rel="noopener" class="btn btn-small btn-primary">View Article</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <h3>Blob Statistics</h3>
+            <div class="project-actions">
+              <a href="./assets/blobstatistics-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small">PDF</a>
+              <a href="https://www.youtube.com/watch?v=Lr9qHEhf-sE" target="_blank" rel="noopener" class="btn btn-small btn-primary">Demo</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <h3>Bar Code</h3>
+            <div class="project-actions">
+              <a href="./assets/barcode-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small">PDF</a>
+              <a href="https://www.youtube.com/watch?v=cHtepzf0Grg" target="_blank" rel="noopener" class="btn btn-small btn-primary">Demo</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <h3>Piano Synthesizer</h3>
+            <div class="project-actions">
+              <a href="./assets/pianosynthesizer-pdf.pdf" target="_blank" rel="noopener" class="btn btn-small">PDF</a>
+              <a href="https://www.youtube.com/watch?v=gyYTnPOkHJs" target="_blank" rel="noopener" class="btn btn-small btn-primary">Demo</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="certifications" class="section reveal">
+        <h2 class="section-title">Certifications</h2>
+        <p class="section-subtitle">Most recent first · Verified links · <a href="https://www.linkedin.com/in/tanjinchun/details/certifications/" target="_blank" rel="noopener">View all on LinkedIn</a> · <a href="https://www.credly.com/users/tanjinchun" target="_blank" rel="noopener">Credly</a></p>
+        <div class="certifications-grid">
+          <a href="https://coursera.org/share/edcd9d1764fadc44afd45b92f73493ff" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">Google</span>
+            <h4>Google IT Support</h4>
+            <span class="cert-date">Nov 2022</span>
+          </a>
+          <a href="https://coursera.org/share/6181c7de77abe008b0760713cff4a8fe" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">Vanderbilt University</span>
+            <h4>MATLAB Programming for Engineers and Scientists</h4>
+            <span class="cert-date">Jun 2022</span>
+          </a>
+          <a href="https://coursera.org/share/4d3acd601ec0697baa2438c28c99eadd" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">Google</span>
+            <h4>Google Data Analytics</h4>
+            <span class="cert-date">Oct 2021</span>
+          </a>
+          <a href="https://coursera.org/share/ee1608cc159df408b5759de01848238f" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">Google</span>
+            <h4>Google Project Management</h4>
+            <span class="cert-date">Aug 2021</span>
+          </a>
+          <a href="https://coursera.org/share/cbd99c4b3018300ad6ec73d46ff23eff" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">University of Michigan</span>
+            <h4>Web Design for Everybody: Basics of Web Development & Coding</h4>
+            <span class="cert-date">Jun 2021</span>
+          </a>
+          <a href="https://credly.com/badges/55eec759-2c47-448e-b866-0b4bf5a83e6c/public_url" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">IBM</span>
+            <h4>Artificial Intelligence Foundations Specialization</h4>
+            <span class="cert-date">Apr 2021</span>
+          </a>
+          <a href="https://credly.com/badges/8cbfcf20-b8de-4bd5-ac70-17f8b69d9a9b/public_url" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">IBM</span>
+            <h4>IBM AI Foundations for Business Specialization</h4>
+            <span class="cert-date">Apr 2021</span>
+          </a>
+          <a href="https://coursera.org/share/f7e88b7f7d1ee586ae1f80d0dcee8f0b" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">IBM</span>
+            <h4>AI Foundation for Everyone</h4>
+            <span class="cert-date">Mar 2021</span>
+          </a>
+          <a href="https://www.engineersaustralia.org.au" target="_blank" rel="noopener" class="cert-card">
+            <span class="cert-issuer">Engineers Australia</span>
+            <h4>GradIEAust</h4>
+          </a>
+        </div>
+        <p class="cert-note">New 2026 certifications? Add them to your <a href="https://www.linkedin.com/in/tanjinchun/details/certifications/" target="_blank" rel="noopener">LinkedIn</a> and they’ll be visible here on the next update.</p>
+      </section>
+
+      <section id="achievements" class="section reveal">
+        <h2 class="section-title">Honors & Awards</h2>
+        <div class="achievements-grid">
+          <div class="achievement-card">
+            <h4>Competitions & Case Studies</h4>
+            <ul>
+              <li>National Champion — 2025 McKinsey & Company Case Competition</li>
+              <li>Champion — Imagine 2025: Youth Startathon</li>
+              <li>First Place — ASEAN AYO Northeast Asia & India Competition</li>
+              <li>First Runner Up — MUIG Stock Pitch Competition</li>
+              <li>Second Runner Up — Asian Consulting Conference</li>
+              <li>Second Runner Up — Deloitte AdvantEdge</li>
+              <li>Finalist — Huawei Sales Elite Challenge</li>
+              <li>Top 40 — Talentbank Boardroom Challenge 2025</li>
+            </ul>
+          </div>
+          <div class="achievement-card">
+            <h4>Achievements & Scholarships</h4>
+            <ul>
+              <li>Outstanding Achievement — IC Design Mini Project</li>
+              <li>Cadence Student Ambassador</li>
+              <li>James Dyson Award Nominee</li>
+              <li>Champion — Monash Leap Into Leadership</li>
+              <li>Monash High Achiever Award</li>
+              <li>Research Scholar Awardee — ASEAN Youth Culture Initiative</li>
+              <li>Oxford Inspiration Program Scholar</li>
+              <li>Roots and Shoots Award</li>
+              <li>Pingat Kecemerlangan Pendidikan</li>
+              <li>King's Scout (Pengakap Raja)</li>
+              <li>Sunway College Special Scholarship Award</li>
+            </ul>
+          </div>
+          <div class="achievement-card">
+            <h4>Professional Affiliations</h4>
+            <ul>
+              <li>Project Management Institute</li>
+              <li>Engineers Australia (GradIEAust)</li>
+              <li>Australian Computer Society (Graduate)</li>
+              <li>Board of Engineers Malaysia</li>
+              <li>Institution of Engineers Malaysia</li>
+              <li>Association of Computing Machinery</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 15l-6-6-6 6"/>
+      </svg>
+    </button>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/tanjinchun/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <img src="./assets/linkedin.png" alt="LinkedIn" class="icon" />
+          </a>
+          <a href="mailto:nigeltanjc@gmail.com" aria-label="Email">
+            <img src="./assets/email.png" alt="Email" class="icon" />
+          </a>
+          <a href="tel:+601124215639" aria-label="Phone">
+            <img src="./assets/phone.png" alt="Phone" class="icon" />
+          </a>
+        </div>
+        <p class="footer-copyright">© 2025 Nigel Tan Jin Chun. All rights reserved.</p>
+      </div>
     </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
-
-<script>
-  window.addEventListener('load', function() {
-    const loader = document.getElementById('loader');
-    loader.style.display = 'none';
-  });
-</script>
