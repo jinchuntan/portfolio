@@ -1,169 +1,209 @@
-/**
- * Portfolio - Nigel Tan Jin Chun
- * Interactive enhancements
- */
+/* Progressive enhancement. Every project and record is present in the HTML. */
+import { matches } from './lib/search.mjs';
+import { evaluateSignal, signalSVG } from './lib/uncertainty.mjs';
+document.documentElement.classList.add('js');
 
-// Tunable UI timings (ms). Keep in one place for easy reuse across pages.
-const WELCOME_SESSION_KEY = "portfolio_welcome_seen";
-const WELCOME_AUTO_DISMISS_MS = 1200;
-const WELCOME_FADE_MS = 350;
-const BACK_TO_TOP_SCROLL_Y = 400;
-const HEADER_SOLID_SCROLL_Y = 50;
-
-// Hamburger menu
-function toggleMenu() {
-  const menu = document.querySelector(".menu-links");
-  const icon = document.querySelector(".hamburger-icon");
-  const isOpen = menu.classList.toggle("open");
-  icon.classList.toggle("open", isOpen);
-  document.body.style.overflow = isOpen ? "hidden" : "";
-}
-
-// Welcome overlay
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  if (!loader) return;
-
-  // Skip the welcome screen after first visit in this browser tab/session.
-  if (sessionStorage.getItem(WELCOME_SESSION_KEY) === "1") {
-    loader.style.display = "none";
-    return;
-  }
-
-  let dismissed = false;
-  const dismissLoader = () => {
-    if (dismissed) return;
-    dismissed = true;
-    loader.classList.add("hidden");
-    document.body.style.overflow = "";
-    sessionStorage.setItem(WELCOME_SESSION_KEY, "1");
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, WELCOME_FADE_MS);
-  };
-
-  // Lock background scrolling while splash is visible.
-  document.body.style.overflow = "hidden";
-  const timer = setTimeout(dismissLoader, WELCOME_AUTO_DISMISS_MS);
-  loader.addEventListener(
-    "click",
-    () => {
-      // Allow fast skip on user intent.
-      clearTimeout(timer);
-      dismissLoader();
-    },
-    { once: true }
-  );
-});
-
-// Close menu on outside click
-document.addEventListener("click", (e) => {
-  const menu = document.querySelector(".menu-links");
-  const icon = document.querySelector(".hamburger-icon");
-  const hamburgerNav = document.getElementById("hamburger-nav");
-
-  if (hamburgerNav && !hamburgerNav.contains(e.target) && menu?.classList.contains("open")) {
-    menu.classList.remove("open");
-    icon?.classList.remove("open");
-    document.body.style.overflow = "";
-  }
-});
-
-// Header + progress + back-to-top
-const header = document.querySelector(".header");
-const backToTop = document.getElementById("back-to-top");
-const progressBar = document.getElementById("scroll-progress");
-
-const updateOnScroll = () => {
-  if (header) {
-    header.style.background =
-      window.scrollY > HEADER_SOLID_SCROLL_Y ? "rgba(255, 255, 255, 0.98)" : "rgba(255, 255, 255, 0.9)";
-  }
-
-  if (backToTop) {
-    backToTop.classList.toggle("visible", window.scrollY > BACK_TO_TOP_SCROLL_Y);
-  }
-
-  if (progressBar) {
-    // Scale the progress bar from 0 to 1 based on page scroll ratio.
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
-    progressBar.style.transform = `scaleX(${progress})`;
-  }
+const captions = {
+  engineering: ['01', 'Start with the details.', 'Physical design, power integrity, and tools that help engineers work.'],
+  research: ['02', 'Ask a better question.', 'Forecast uncertainty, reliable monitoring, and evidence that connects to decisions.'],
+  impact: ['03', 'Keep people in the loop.', 'Mentorship, sustainable energy, and a semiconductor alumni community.']
 };
-
-window.addEventListener("scroll", updateOnScroll, { passive: true });
-updateOnScroll();
-
-// Scroll reveal animation
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: "0px 0px -50px 0px"
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-
-// Active nav links while scrolling
-const navLinks = [...document.querySelectorAll(".nav-links a, .menu-links a")];
-const sectionLinks = new Map();
-
-navLinks.forEach((link) => {
-  const href = link.getAttribute("href");
-  if (!href || !href.startsWith("#")) return;
-  const id = href.slice(1);
-  // Map one section id to multiple links (desktop nav + mobile nav).
-  if (!sectionLinks.has(id)) sectionLinks.set(id, []);
-  sectionLinks.get(id).push(link);
-});
-
-const setActiveNav = (id) => {
-  navLinks.forEach((link) => link.classList.remove("active"));
-  (sectionLinks.get(id) || []).forEach((link) => link.classList.add("active"));
-};
-
-const sections = [...document.querySelectorAll("main section[id]")];
-if (sections.length > 0) {
-  // Keep a sensible default on first paint.
-  setActiveNav(sections[0].id);
-
-  const sectionSpy = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        // Prefer the most visible section when multiple overlap.
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      if (visible[0]?.target?.id) setActiveNav(visible[0].target.id);
-    },
-    { threshold: [0.25, 0.5, 0.75], rootMargin: "-20% 0px -55% 0px" }
-  );
-
-  sections.forEach((section) => sectionSpy.observe(section));
-}
-
-// Skills tabs
-document.querySelectorAll(".tab-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const tabId = btn.dataset.tab;
-
-    document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
-    document.querySelectorAll(".tab-pane").forEach((p) => p.classList.remove("active"));
-
-    btn.classList.add("active");
-    const pane = document.getElementById(tabId);
-    if (pane) pane.classList.add("active");
+document.querySelectorAll('[data-domain-select]').forEach(button => {
+  button.addEventListener('click', () => {
+    const domain = button.dataset.domainSelect;
+    const [number, title, description] = captions[domain];
+    document.querySelector('.hero-lab').dataset.domain = domain;
+    document.querySelector('.lab-caption-number').textContent = number;
+    const caption = document.querySelector('#domain-caption');
+    const strong = document.createElement('strong');
+    strong.textContent = title;
+    caption.replaceChildren(strong, document.createElement('br'), document.createTextNode(description));
+    document.querySelectorAll('[data-domain-select]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   });
 });
-
-if (backToTop) {
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+document.querySelectorAll('[data-project-filter]').forEach(button => {
+  button.addEventListener('click', () => {
+    const category = button.dataset.projectFilter;
+    let visible = 0;
+    document.querySelectorAll('[data-project-category]').forEach(card => {
+      card.hidden = category !== 'All' && card.dataset.projectCategory !== category;
+      if (!card.hidden) visible++;
+    });
+    document.querySelectorAll('[data-project-filter]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    document.querySelector('#project-count').textContent = `${visible} projects shown${category === 'All' ? '' : ` in ${category}`}.`;
   });
+});
+document.querySelector('#copy-email').addEventListener('click', async () => {
+  const status = document.querySelector('#copy-status');
+  try {
+    await navigator.clipboard.writeText('nigeltanjc@gmail.com');
+    status.textContent = 'Email address copied.';
+  } catch {
+    status.textContent = 'Copy is unavailable here. Select nigeltanjc@gmail.com or open the email link.';
+  }
+});
+document.querySelector('#print-profile').addEventListener('click', () => window.print());
+
+// Local fieldbook search, combined with independent category filters.
+const recordSearch = document.querySelector('#record-search');
+const recordGroups = [...document.querySelectorAll('.record-group')];
+const initialOpen = new Map();
+let searchingRecords = false;
+function updateRecords() {
+  const query = recordSearch.value.trim();
+  if (query && !searchingRecords) recordGroups.forEach(group => initialOpen.set(group, group.open));
+  const restoring = !query && searchingRecords;
+  searchingRecords = Boolean(query);
+  let total = 0;
+  for (const group of recordGroups) {
+    const category = group.querySelector('select').value;
+    let visible = 0;
+    group.querySelectorAll('.record').forEach(row => {
+      row.hidden = !matches(row.dataset.search, query) || (category !== 'All' && row.dataset.recordCategory !== category);
+      if (!row.hidden) visible++;
+    });
+    if (query) group.open = visible > 0;
+    else if (restoring) group.open = initialOpen.get(group) ?? false;
+    total += visible;
+    // Keep the group and its filter visible even for an empty category.
+    group.querySelector('.record-total').firstChild.textContent = `${visible} `;
+    const pmi = group.querySelector('.pmi-detail');
+    if (pmi) pmi.hidden = Boolean(query) || category !== 'All';
+  }
+  document.querySelector('#record-results').textContent = `${total} matching ${total === 1 ? 'entry' : 'entries'}.`;
+  document.querySelector('#record-empty').hidden = total > 0;
 }
+recordSearch.addEventListener('input', updateRecords);
+recordGroups.forEach(group => group.querySelector('select').addEventListener('change', updateRecords));
+document.querySelector('#clear-record-search').addEventListener('click', () => {
+  recordSearch.value = '';
+  recordGroups.forEach(group => { group.querySelector('select').value = 'All'; });
+  updateRecords();
+  recordSearch.focus();
+});
+
+// Search the already-rendered page; no tracking, network request, or account needed.
+const dialog = document.querySelector('#search-dialog');
+const siteSearch = document.querySelector('#site-search');
+const searchList = document.querySelector('#site-search-results');
+const sectionEntries = [...document.querySelectorAll('main > section[id]')].map(section => ({
+  title: section.querySelector('h1,h2').textContent.replace(/\s+/g, ' '),
+  label: 'Section', text: section.querySelector('h1,h2').textContent,
+  target: section, href: `#${section.id}`
+}));
+const contentEntries = [...document.querySelectorAll('.project-card, .record')].map((element, i) => {
+  if (!element.id) element.id = `entry-${i}`;
+  return { title: element.querySelector('h3,h4').textContent, label: element.dataset.projectCategory || element.dataset.recordCategory,
+    text: element.dataset.search, target: element, href: `#${element.id}` };
+});
+const searchIndex = [...sectionEntries, ...contentEntries];
+let searchOpener;
+function updateSiteSearch() {
+  const query = siteSearch.value.trim();
+  const results = query ? searchIndex.filter(entry => matches(entry.text, query)) : sectionEntries;
+  searchList.replaceChildren();
+  results.slice(0, 30).forEach(entry => {
+    const li = document.createElement('li');
+    const anchor = document.createElement('a');
+    const label = document.createElement('span');
+    label.textContent = entry.label;
+    anchor.href = entry.href;
+    anchor.append(label, document.createTextNode(entry.title));
+    anchor.addEventListener('click', () => {
+      dialog.close();
+      // Reset active filters so a result can never be hidden by an earlier choice.
+      if (entry.target.classList.contains('record')) {
+        recordSearch.value = '';
+        recordGroups.forEach(group => { group.querySelector('select').value = 'All'; });
+        updateRecords();
+      } else if (entry.target.classList.contains('project-card')) {
+        document.querySelector('[data-project-filter="All"]').click();
+      }
+      let ancestor = entry.target;
+      while (ancestor && ancestor !== document.body) {
+        if (ancestor.tagName === 'DETAILS') ancestor.open = true;
+        ancestor = ancestor.parentElement;
+      }
+      entry.target.tabIndex = -1;
+      entry.target.focus({ preventScroll: true });
+      entry.target.addEventListener('blur', () => entry.target.removeAttribute('tabindex'), { once: true });
+      // The anchor's default action updates the fragment and scrolls into view.
+    });
+    li.append(anchor);
+    searchList.append(li);
+  });
+  document.querySelector('#site-search-status').textContent = results.length > 30 ? `${results.length} matches. Showing the first 30; type more to narrow the list.` : `${results.length} ${results.length === 1 ? 'match' : 'matches'}.`;
+}
+function openSearch(opener) {
+  if (dialog.open || typeof dialog.showModal !== 'function') return;
+  searchOpener = opener;
+  siteSearch.value = '';
+  updateSiteSearch();
+  dialog.showModal();
+  siteSearch.focus();
+}
+document.querySelectorAll('[data-open-search]').forEach(button => button.addEventListener('click', () => openSearch(button)));
+document.querySelector('[data-close-search]').addEventListener('click', () => { dialog.close(); searchOpener?.focus(); });
+dialog.addEventListener('cancel', () => searchOpener?.focus());
+dialog.addEventListener('click', event => {
+  if (event.target !== dialog) return;
+  const bounds = dialog.getBoundingClientRect();
+  if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+    dialog.close();
+    searchOpener?.focus();
+  }
+});
+siteSearch.addEventListener('input', updateSiteSearch);
+document.addEventListener('keydown', event => {
+  const editing = event.target.closest('input,textarea,select,[contenteditable="true"]');
+  if (!editing && !dialog.open && (event.key === '/' || ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k'))) {
+    event.preventDefault();
+    openSearch(document.activeElement);
+  }
+});
+
+// Expand fragment-linked records even when the visitor opens a URL directly.
+function revealFragment() {
+  let id;
+  try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+  const target = document.getElementById(id);
+  if (!target) return;
+  let ancestor = target;
+  while (ancestor && ancestor !== document.body) {
+    if (ancestor.tagName === 'DETAILS') ancestor.open = true;
+    ancestor = ancestor.parentElement;
+  }
+}
+window.addEventListener('hashchange', revealFragment);
+revealFragment();
+
+// A deterministic illustration of interval width, explicitly separate from research evidence.
+const intervalWidth = document.querySelector('#interval-width');
+const toggleDrift = document.querySelector('#toggle-drift');
+function updateSignal() {
+  const drift = toggleDrift.getAttribute('aria-pressed') === 'true';
+  const result = evaluateSignal(intervalWidth.value, drift);
+  // SVG markup is generated only from bounded numeric values, never user-supplied text.
+  document.querySelector('#signal-chart').innerHTML = signalSVG(result.halfWidth, drift);
+  document.querySelector('#interval-value').textContent = `±${result.halfWidth.toFixed(1)}°C`;
+  document.querySelector('#signal-count').textContent = `${result.outside} / 80 outside interval`;
+}
+intervalWidth.addEventListener('input', updateSignal);
+toggleDrift.addEventListener('click', () => {
+  const on = toggleDrift.getAttribute('aria-pressed') !== 'true';
+  toggleDrift.setAttribute('aria-pressed', String(on));
+  toggleDrift.firstChild.textContent = on ? 'Remove sensor drift ' : 'Add sensor drift ';
+  updateSignal();
+});
+updateSignal();
+
+// Ensure closed disclosure content is printable, then restore the visitor's state.
+let printState = [];
+window.addEventListener('beforeprint', () => {
+  printState = [...document.querySelectorAll('details')].map(details => [details, details.open]);
+  printState.forEach(([details]) => { details.open = true; });
+});
+window.addEventListener('afterprint', () => {
+  printState.forEach(([details, open]) => { details.open = open; });
+  printState = [];
+});
