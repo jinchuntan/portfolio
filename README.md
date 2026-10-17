@@ -16,6 +16,8 @@ npm test
 npm run build:site
 ```
 
+The PR workflow also runs Chromium at 1440, 768, 390 and 320 px, checks keyboard and mobile navigation, image loading, overflow, no-JavaScript behavior, reduced motion and axe accessibility rules, and uploads screenshots. Run it locally on a browser-capable host with `npx playwright install chromium` and `npm run test:browser` after packaging. Browser checks use the local `dist/` build and need no Vercel credentials.
+
 Serve `dist/` with an ordinary static HTTP server. There are no runtime dependencies, API keys, analytics requests or external font requests. JavaScript progressively enhances native links with a mobile menu, current-section indicator and optional signal interaction. Reduced motion is respected. Pages and navigation remain usable without JavaScript.
 
 ## Content and source

@@ -10,12 +10,12 @@ test('all public pages load images, wrap text and avoid horizontal overflow',asy
  expect(errors).toEqual([]);
 });
 test('navigation, mobile menu, current location and browser back work',async({page},info)=>{
- await page.goto('/');const mobile=page.viewportSize().width<=760;
+ await page.goto('/');const mobile=page.viewportSize().width<=760;if(!mobile)await expect(page.getByRole('button',{name:'Menu'})).toBeHidden();
  if(mobile){const menu=page.getByRole('button',{name:'Menu'});await menu.click();await expect(menu).toHaveAttribute('aria-expanded','true');await page.screenshot({path:`${out}/${info.project.name}-menu.png`});await menu.press('Escape');await expect(menu).toBeFocused();await expect(menu).toHaveAttribute('aria-expanded','false');await menu.click();}
- await page.getByRole('navigation').getByRole('link',{name:'Work',exact:true}).click();await expect(page.getByRole('navigation').getByRole('link',{name:'Work',exact:true})).toHaveAttribute('aria-current','location');
+ await page.getByRole('navigation').getByRole('link',{name:'Work',exact:true}).click();await expect(page.locator('#primary-nav [data-nav=work]')).toHaveAttribute('aria-current','location');
  if(mobile)await expect(page.getByRole('button',{name:'Menu'})).toHaveAttribute('aria-expanded','false');
- await page.locator('.project-card-link').first().click();await expect(page).toHaveURL(/\/work\/confosense\/$/);await expect(page.getByRole('navigation').getByRole('link',{name:'Work',exact:true})).toHaveAttribute('aria-current','page');await page.goBack();await expect(page).toHaveURL(/\/#work$/);
- await page.goto('/');await page.getByRole('link',{name:'Get in touch',exact:true}).first().click();await expect(page.getByRole('navigation').getByRole('link',{name:'Contact',exact:true})).toHaveAttribute('aria-current','location');await expect(page.locator('.email-link')).toHaveAttribute('href','mailto:nigeltanjc@gmail.com');
+ await page.locator('.project-card-link').first().click();await expect(page).toHaveURL(/\/work\/confosense\/$/);await expect(page.locator('#primary-nav [data-nav=work]')).toHaveAttribute('aria-current','page');await page.goBack();await expect(page).toHaveURL(/\/#work$/);
+ await page.goto('/');await page.getByRole('link',{name:'Get in touch',exact:true}).first().click();await expect(page.locator('#primary-nav [data-nav=contact]')).toHaveAttribute('aria-current','location');await expect(page.locator('.email-link')).toHaveAttribute('href','mailto:nigeltanjc@gmail.com');
 });
 test('keyboard access, focus treatment and reduced-motion interaction',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await page.keyboard.press('Tab');await expect(page.getByRole('link',{name:'Skip to content'})).toBeFocused();await page.keyboard.press('Enter');await expect(page.locator('#main')).toBeFocused();
