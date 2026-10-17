@@ -1,172 +1,88 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import {readFileSync,existsSync} from 'node:fs';
 import vm from 'node:vm';
-import { parseHTML } from 'linkedom';
-import { profile, render, escape } from '../scripts/build.mjs';
-import { matches, filterEntries } from '../lib/search.mjs';
-import { evaluateSignal, signalSVG } from '../lib/uncertainty.mjs';
-
-const html = render();
-function setup() {
-  const { window, document } = parseHTML(html);
-  const dialog = document.querySelector('dialog');
-  dialog.showModal = () => { dialog.open = true; };
-  dialog.close = () => { dialog.open = false; };
-  dialog.getBoundingClientRect = () => ({left:0,top:0,right:600,bottom:600});
-  // linkedom models markup and events, not browser layout or native focus management.
-  for (const element of document.querySelectorAll('*')) element.focus = () => { document._focused = element; };
-  for (const select of document.querySelectorAll('select')) {
-    let value = 'All';
-    Object.defineProperty(select, 'value', {get:()=>value,set:next=>{value=next;}});
-  }
-  window.print = () => {};
-  const location = {hash:''};
-  const navigator = {clipboard:{writeText:async text=>{navigator.copied=text;}}};
-  const context = vm.createContext({window,document,location,navigator,matches,evaluateSignal,signalSVG,console});
-  const source=readFileSync(new URL('../script.js',import.meta.url),'utf8').replace(/^import .*;\n/gm,'');
-  vm.runInContext(source, context);
-  const fire = (selector,event='click') => document.querySelector(selector).dispatchEvent(new window.Event(event,{bubbles:true}));
-  return {window,document,navigator,fire,location};
+import {parseHTML} from 'linkedom';
+import {renderPages,profile,escape} from '../scripts/build.mjs';
+const pages=renderPages();
+function setup(page='index.html'){
+ const {window,document}=parseHTML(pages[page]);
+ const media={addEventListener(){}};
+ const context={document,window,location:{pathname:'/'},requestAnimationFrame:fn=>fn(),setTimeout,clearTimeout};
+ window.matchMedia=()=>media;window.scrollY=0;window.innerHeight=900;window.IntersectionObserver=function(){};
+ vm.runInNewContext(readFileSync(new URL('../script.js',import.meta.url),'utf8'),context);
+ const fire=(selector,type='click',key)=>{const event=new window.Event(type,{bubbles:true});if(key)event.key=key;document.querySelector(selector).dispatchEvent(event);};
+ return {document,window,fire};
 }
-
-test('profile renders complete records into the no-JavaScript document',()=>{
-  const {document}=parseHTML(html);
-  assert.equal(document.querySelectorAll('.project-card').length,profile.projects.length);
-  assert.equal(document.querySelectorAll('#achievements .record').length,29);
-  assert.equal(document.querySelectorAll('#certifications .record').length,71);
-  assert.equal(document.querySelectorAll('#community-record .record').length,35);
-  assert.equal(document.querySelectorAll('.experience-row').length,8);
-  assert.equal(document.querySelectorAll('.education-row').length,8);
-  assert.ok(!html.includes('Master of Data Science'));
-  assert.ok(!/\{\{\w+\}\}/.test(html));
-  assert.ok(html.includes('NOT A RESEARCH RESULT'));
+test('home is concise with four selected projects, three recognition highlights and four nav destinations',()=>{
+ const {document}=parseHTML(pages['index.html'].replaceAll('><','> <'));
+ assert.equal(document.querySelectorAll('.project-card').length,4);
+ assert.equal(document.querySelectorAll('.recognition-row').length,3);
+ assert.deepEqual([...document.querySelectorAll('#primary-nav a')].map(a=>a.textContent),['Work','About','Recognition','Contact']);
+ for(const n of document.querySelectorAll('script,style,svg'))n.remove();
+ const words=document.body.textContent.trim().split(/\s+/).filter(Boolean).length;
+ assert.ok(words>=270&&words<=410,`Home has ${words} words`);
+ assert.match(document.querySelector('h1').textContent,/Nigel Tan/);
+ const actions=[...document.querySelectorAll('.hero-actions a')].map(a=>a.textContent.trim().replace(/ ↗$/,''));
+ assert.deepEqual(actions,['View my work','Get in touch']);
 });
-test('local resources, fragments, image descriptions, and external links are valid',()=>{
-  const {document}=parseHTML(html);
-  const ids=[...document.querySelectorAll('[id]')].map(x=>x.id);
-  assert.equal(new Set(ids).size,ids.length,'duplicate IDs');
-  for(const el of document.querySelectorAll('[src],link[href],a[href]')) {
-    const url=el.getAttribute('src') || el.getAttribute('href');
-    if(url.startsWith('#')) assert.ok(document.getElementById(url.slice(1)),url);
-    else if(url.startsWith('./')) assert.ok(existsSync(new URL('../'+url.slice(2),import.meta.url)),url);
-    if(el.getAttribute('target')==='_blank') assert.ok(el.getAttribute('rel').includes('noopener'));
-  }
-  for(const img of document.querySelectorAll('img')) assert.ok(img.getAttribute('alt'));
+test('every page has correct canonical metadata, headings, unique IDs and valid internal links/assets',()=>{
+ for(const [file,html]of Object.entries(pages)){
+ if(!file.endsWith('.html'))continue;
+ const {document}=parseHTML(html);
+ const route=file==='index.html'?'/':file==='404.html'?'/404.html':'/'+file.replace('index.html','');
+ assert.equal(document.querySelector('link[rel="canonical"]').href,'https://tanjinchun.com'+route);
+ assert.equal(document.querySelector('[property="og:url"]').content,'https://tanjinchun.com'+route);
+ assert.equal(JSON.parse(document.querySelector('[type="application/ld+json"]').textContent).url,'https://tanjinchun.com/');
+ assert.equal(document.querySelectorAll('h1').length,1,file);
+ const ids=[...document.querySelectorAll('[id]')].map(x=>x.id);assert.equal(new Set(ids).size,ids.length,file+' duplicate ID');
+ for(const x of document.querySelectorAll('[href],[src]')){
+ const href=x.getAttribute('href')||x.getAttribute('src');
+ if(href.startsWith('#'))assert.ok(document.getElementById(href.slice(1)),file+href);
+ if(href.startsWith('/')){
+ const [url,hash]=href.split('#');let target=url==='/'?'index.html':url.endsWith('/')?url.slice(1)+'index.html':url.slice(1);
+ assert.ok(pages[target]||existsSync(new URL('../'+target,import.meta.url)),file+' -> '+href);
+ if(hash&&pages[target])assert.ok(parseHTML(pages[target]).document.getElementById(hash),href);
+ }
+ }
+ assert.equal(document.querySelectorAll('img:not([alt])').length,0);
+ assert.ok(!/tanjinchun\.me|\{\{\w+\}\}/.test(html));
+ }
 });
-test('template escapes supplied strings rather than introducing markup',()=>{
-  assert.equal(escape('<img src=x onerror="bad()">'), '&lt;img src=x onerror=&quot;bad()&quot;&gt;');
+test('all eight projects have dedicated pages with contribution, outcome, scope and evidence links',()=>{
+ assert.equal(profile.projects.length,8);
+ for(const p of profile.projects){const {document}=parseHTML(pages[`work/${p.id}/index.html`]);
+ for(const text of ['The problem','My contribution','The outcome','Scope & status'])assert.ok([...document.querySelectorAll('h2')].some(h=>h.textContent===text));
+ assert.ok(document.querySelector('.case-links a'));assert.ok(document.querySelector('figcaption'));
+ assert.equal(document.querySelector('[data-nav="work"]').getAttribute('aria-current'),'page');
+ }
 });
-test('literal multi-token search handles accents, quotes, and regex characters',()=>{
-  assert.ok(matches('Université · Cadence Semiconductor','universite cadence'));
-  assert.ok(!matches('Cadence','.*'));
-  assert.ok(!matches('PMP','<script>'));
-  assert.equal(filterEntries([{text:'PMP leadership',category:'Business'},{text:'PMP',category:'Other'}],'pmp','Business').length,1);
+test('source profile retains award names, dates, credential and community records',()=>{
+ const {document}=parseHTML(pages['recognition/index.html']);
+ assert.equal(document.querySelectorAll('[id^="award-"]').length,profile.awards.length);
+ for(const [title,,date]of profile.awards){assert.ok(document.body.textContent.includes(title));assert.ok(document.body.textContent.includes(date));}
+ assert.equal(document.querySelectorAll('[id^="credential-"]').length,profile.certifications.length);
+ assert.equal(parseHTML(pages['about/index.html']).document.querySelectorAll('[id^="community-"]').length,profile.volunteering.length);
 });
-test('project filter changes visible cards and pressed states, then restores all',()=>{
-  const {document,fire}=setup();
-  fire('[data-project-filter="Research"]');
-  assert.equal(document.querySelectorAll('.project-card:not([hidden])').length,1);
-  assert.equal(document.querySelector('[data-project-filter="Research"]').getAttribute('aria-pressed'),'true');
-  assert.match(document.querySelector('#project-count').textContent,/1 projects/);
-  fire('[data-project-filter="All"]');
-  assert.equal(document.querySelectorAll('.project-card:not([hidden])').length,8);
+test('mobile menu toggles, closes after navigation and supports Escape with focus restoration',()=>{
+ const {document,fire}=setup();const menu=document.querySelector('.menu-toggle');
+ assert.equal(menu.hidden,false);assert.equal(menu.getAttribute('aria-expanded'),'false');
+ fire('.menu-toggle');assert.equal(menu.getAttribute('aria-expanded'),'true');
+ fire('[data-nav="work"]');assert.equal(menu.getAttribute('aria-expanded'),'false');
+ let restored=false;menu.focus=()=>restored=true;fire('.menu-toggle');fire('body','keydown','Escape');
+ assert.equal(menu.getAttribute('aria-expanded'),'false');assert.equal(restored,true);
 });
-test('interest selector updates the chip routes and caption',()=>{
-  const {document,fire}=setup();
-  fire('[data-domain-select="research"]');
-  assert.equal(document.querySelector('.hero-lab').dataset.domain,'research');
-  assert.match(document.querySelector('#domain-caption').textContent,/Ask a better question/);
-  assert.equal(document.querySelectorAll('[data-domain-select][aria-pressed="true"]').length,1);
+test('signal interaction cycles through three concrete outcomes with an accessible live update',()=>{
+ const {document,fire}=setup();assert.equal(document.querySelector('#send-signal').hidden,false);
+ const values=['Chips → dependable systems.','Research → better-informed decisions.','Community → shared opportunities.','Chips → dependable systems.'];
+ for(const value of values){fire('#send-signal');assert.equal(document.querySelector('#signal-output').textContent,value);}
+ assert.equal(document.querySelector('#signal-output').getAttribute('aria-live'),'polite');
 });
-test('fieldbook search combines category and query, and handles no results and clear',()=>{
-  const {document,fire}=setup();
-  document.querySelector('#record-search').value='cadence';fire('#record-search','input');
-  assert.equal(document.querySelectorAll('.record:not([hidden])').length,9);
-  assert.equal(document.querySelector('#certifications').open,true);
-  document.querySelector('#certifications select').value='Cloud & AI';fire('#certifications select','change');
-  assert.equal(document.querySelectorAll('.record:not([hidden])').length,1); // Cadence student ambassador
-  document.querySelector('#record-search').value='no-such-result';fire('#record-search','input');
-  assert.equal(document.querySelector('#record-empty').hidden,false);
-  fire('#clear-record-search');
-  assert.equal(document.querySelectorAll('.record:not([hidden])').length,135);
-  assert.equal(document.querySelector('#record-empty').hidden,true);
-});
-test('global search opens, safely renders matches, and restores a hidden project',()=>{
-  const {document,fire}=setup();
-  fire('[data-project-filter="Engineering"]');
-  fire('[data-open-search]');
-  assert.equal(document.querySelector('dialog').open,true);
-  document.querySelector('#site-search').value='RoomLab';fire('#site-search','input');
-  assert.equal(document.querySelectorAll('#site-search-results a').length,1);
-  fire('#site-search-results a');
-  assert.equal(document.querySelector('dialog').open,false);
-  assert.equal(document.querySelector('#project-roomlab').hidden,false);
-  fire('[data-open-search]');
-  document.querySelector('#site-search').value='<img onerror=alert(1)>';fire('#site-search','input');
-  assert.equal(document.querySelectorAll('#site-search-results img').length,0);
-  assert.equal(document.querySelectorAll('#site-search-results a').length,0);
-});
-test('global record search clears earlier filters and opens its parent disclosure',()=>{
-  const {document,fire}=setup();
-  document.querySelector('#record-search').value='missing';fire('#record-search','input');
-  fire('[data-open-search]');
-  document.querySelector('#site-search').value='King\'s Scout';fire('#site-search','input');
-  assert.equal(document.querySelectorAll('#site-search-results a').length,1);
-  fire('#site-search-results a');
-  assert.equal(document.querySelector('#achievements').open,true);
-  assert.equal(document.querySelector('#record-search').value,'');
-  assert.equal(document.querySelectorAll('#achievements .record:not([hidden])').length,29);
-});
-test('synthetic illustration has bounded intervals and monotonic outside counts',()=>{
-  let previous=Infinity;
-  for(let width=.2;width<=1.61;width+=.1){
-    const result=evaluateSignal(width);
-    assert.equal(result.points.length,80);
-    assert.ok(result.outside<=previous);
-    previous=result.outside;
-    for(const p of result.points) assert.ok(p.lower<=p.forecast && p.forecast<=p.upper);
-  }
-  assert.equal(evaluateSignal('bad').halfWidth,.7);
-  assert.equal(evaluateSignal(99).halfWidth,1.6);
-  assert.ok(evaluateSignal(.7,true).outside>evaluateSignal(.7,false).outside);
-  for(const drift of [false,true]) for(const width of [.2,1.6]) {
-    for(const p of evaluateSignal(width,drift).points) {
-      assert.ok(Math.max(p.upper,p.observed)<28,'upper chart limit');
-      assert.ok(Math.min(p.lower,p.observed)>22,'lower chart limit');
-    }
-  }
-});
-test('PMI contribution roles are searchable and their disclosure opens',()=>{
-  const {document,fire}=setup();
-  document.querySelector('#record-search').value='PMO of the Year';fire('#record-search','input');
-  assert.equal(document.querySelectorAll('.record:not([hidden])').length,1);
-  assert.equal(document.querySelector('.pmi-detail').hidden,false);
-  assert.equal(document.querySelector('.pmi-detail').open,true);
-});
-test('research controls update output, SVG description, and drift state',()=>{
-  const {document,fire}=setup();
-  document.querySelector('#interval-width').value='1.6';fire('#interval-width','input');
-  assert.equal(document.querySelector('#interval-value').textContent,'±1.6°C');
-  assert.match(document.querySelector('#signal-desc').textContent,/1.6 degrees/);
-  fire('#toggle-drift');
-  assert.equal(document.querySelector('#toggle-drift').getAttribute('aria-pressed'),'true');
-  assert.match(document.querySelector('#signal-desc').textContent,/drift/);
-});
-test('copy email reports both success and a denied-clipboard fallback',async()=>{
-  const {document,navigator,fire}=setup();
-  fire('#copy-email');await new Promise(resolve=>setImmediate(resolve));
-  assert.equal(navigator.copied,profile.email);
-  assert.match(document.querySelector('#copy-status').textContent,/copied/);
-  navigator.clipboard.writeText=async()=>{throw Error('denied');};
-  fire('#copy-email');await new Promise(resolve=>setImmediate(resolve));
-  assert.match(document.querySelector('#copy-status').textContent,/unavailable/);
-});
-test('print opens disclosure content and restores previous state',()=>{
-  const {document,window}=setup();
-  const details=document.querySelector('#achievements');details.open=false;
-  window.dispatchEvent(new window.Event('beforeprint'));
-  assert.ok([...document.querySelectorAll('details')].every(el=>el.open));
-  window.dispatchEvent(new window.Event('afterprint'));
-  assert.equal(details.open,false);
+test('reduced motion, keyboard focus and native no-JS links are present',()=>{
+ const css=readFileSync(new URL('../style.css',import.meta.url),'utf8');assert.match(css,/prefers-reduced-motion:reduce/);assert.match(css,/:focus-visible/);
+ const {document}=parseHTML(pages['index.html']);assert.equal(document.querySelector('.menu-toggle').hidden,true);
+ assert.equal(document.querySelector('#primary-nav').hasAttribute('hidden'),false);
+ assert.equal(document.querySelector('.hero-actions a').href,'#work');
+ assert.equal(document.querySelector('.contact-actions a').href,'mailto:'+profile.email);
+ assert.equal(escape('<img onerror="alert(1)">'),'&lt;img onerror=&quot;alert(1)&quot;&gt;');
 });
