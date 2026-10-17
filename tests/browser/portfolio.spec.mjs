@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {mkdirSync} from 'node:fs';
 const out='qa/screenshots';mkdirSync(out,{recursive:true});
-const routes=['/','/work/','/about/','/recognition/','/contact/','/work/confosense/','/work/apr-dashboard/','/work/hybrid-solar/','/work/roomlab/','/work/quipus/','/work/procurepilot/','/work/gotongflow/','/work/oci-tools/'];
+const routes=['/','/work/','/about/','/recognition/','/contact/','/work/confosense/','/work/hybrid-solar/','/work/roomlab/','/work/quipus/','/work/procurepilot/','/work/gotongflow/','/work/oci-tools/'];
 async function imagesReady(page){for(const image of await page.locator('img').all()){await image.scrollIntoViewIfNeeded();await expect(image).toHaveJSProperty('complete',true);expect(await image.evaluate(i=>i.naturalWidth)).toBeGreaterThan(0);}await page.evaluate(()=>window.scrollTo(0,0));}
 test('all public pages load images, wrap text and avoid horizontal overflow',async({page},info)=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -27,6 +27,7 @@ test('accessibility checks include contrast on home and a project page',async({p
 test('native navigation and content remain usable without JavaScript',async({browser},info)=>{
  const context=await browser.newContext({javaScriptEnabled:false,viewport:info.project.use.viewport});const page=await context.newPage();await page.goto('http://127.0.0.1:4173/');for(const name of ['Work','About','Recognition','Contact'])await expect(page.getByRole('navigation').getByRole('link',{name,exact:true})).toBeVisible();await page.locator('.project-card-link').first().click();await expect(page).toHaveURL(/\/work\/confosense\/$/);await context.close();
 });
-test('capture real dashboard with wholly fabricated inputs',async({page},info)=>{
- test.skip(info.project.name!=='desktop','one capture is enough');await page.setViewportSize({width:1200,height:750});await page.goto('/assets/demos/apr-dashboard/dashboard.html');await expect(page.getByText('demo_logic',{exact:true}).first()).toBeVisible();await page.screenshot({path:`${out}/apr-dashboard.png`});
+test('profile directory is reachable and accessible',async({page})=>{
+ await page.goto('/contact/#profiles');await expect(page.getByRole('heading',{name:'More places to find me.'})).toBeVisible();await expect(page.locator('.profile-card')).toHaveCount(7);
+ const report=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(report.violations).toEqual([]);
 });

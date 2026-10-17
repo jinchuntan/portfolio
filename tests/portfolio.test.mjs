@@ -49,8 +49,8 @@ test('every page has correct canonical metadata, headings, unique IDs and valid 
  assert.ok(!/tanjinchun\.me|\{\{\w+\}\}/.test(html));
  }
 });
-test('all eight projects have dedicated pages with contribution, outcome, scope and evidence links',()=>{
- assert.equal(profile.projects.length,8);
+test('all seven projects have dedicated pages with contribution, outcome, scope and evidence links',()=>{
+ assert.equal(profile.projects.length,7);
  for(const p of profile.projects){const {document}=parseHTML(pages[`work/${p.id}/index.html`]);
  for(const text of ['The problem','My contribution','The outcome','Scope & status'])assert.ok([...document.querySelectorAll('h2')].some(h=>h.textContent===text));
  assert.ok(document.querySelector('.case-links a'));assert.ok(document.querySelector('figcaption'));
@@ -85,4 +85,11 @@ test('reduced motion, keyboard focus and native no-JS links are present',()=>{
  assert.equal(document.querySelector('.hero-actions a').href,'#work');
  assert.equal(document.querySelector('.contact-actions a').href,'mailto:'+profile.email);
  assert.equal(escape('<img onerror="alert(1)">'),'&lt;img onerror=&quot;alert(1)&quot;&gt;');
+});
+
+test('public profile directory links are visible, explicit and included in structured data',()=>{
+ const {document}=parseHTML(pages['contact/index.html']);
+ assert.equal(document.querySelectorAll('.profile-card').length,profile.profiles.length);
+ const person=JSON.parse(document.querySelector('[type="application/ld+json"]').textContent);
+ for(const p of profile.profiles){assert.ok([...document.querySelectorAll('.profile-card')].some(a=>a.href===p.url));assert.ok(person.sameAs.includes(p.url));}
 });
