@@ -2,7 +2,7 @@
 
 Personal portfolio for Nigel Tan (Tan Jin Chun). Canonical production origin: https://tanjinchun.com/.
 
-A concise homepage introduces semiconductor engineering, applied AI research and community leadership. Eight projects have dedicated case studies; career, education, awards, credentials and volunteering live on separate pages.
+A concise homepage introduces semiconductor engineering, applied AI research and community leadership. Seven projects have dedicated case studies; career, education, awards, credentials and volunteering live on separate pages.
 
 ## Develop and validate
 
@@ -26,11 +26,11 @@ Serve `dist/` with an ordinary static HTTP server. There are no runtime dependen
 - `src/template.html`, `scripts/build.mjs`: shared document shell and deterministic page generation. Run the build after edits; commit generated HTML, sitemap and robots.txt.
 - `script.js`, `style.css`, `mediaqueries.css`: responsive interface and progressive enhancement.
 - `scripts/project-media.mjs`: original SVG project illustrations; run with Node to regenerate them.
-- `assets/projects/`: distinct project visuals. The dashboard screenshot uses invented values in the real public renderer. Other project diagrams explicitly identify illustration scope.
+- `assets/projects/`: distinct project visuals. Project diagrams explicitly identify illustration scope.
 - `docs/DESIGN.md`: pre-implementation structure, design principles and content boundaries.
 - `docs/VERIFICATION.md`: verification results and deployment distinction.
 
-Existing PDF and asset URLs are preserved. `scripts/package.mjs` copies an explicit public allowlist to `dist/`, excluding development files and source profile data.
+Approved existing PDF and asset URLs are preserved. `scripts/package.mjs` copies an explicit public allowlist to `dist/`, excluding development files and source profile data.
 
 ## Hosting and domain
 
@@ -41,3 +41,7 @@ Canonical links, Open Graph URLs, social images, Person structured data, sitemap
 The multi-page site assumes root hosting at the custom domain. For a repository-subpath Pages URL, configure an asset/route base before treating that URL as a production alternative.
 
 A branch commit, open pull request, merged commit, successful Vercel deployment and verified custom-domain response are separate states. A green build or merged PR alone does not prove that https://tanjinchun.com serves the new version. Verify the deployed page and assets on that exact domain before calling it live.
+
+## Public content boundary
+
+Feature personal, academic and community projects that are suitable for public sharing. A repository being publicly reachable is not permission to publish employer work. The contact page links to established public professional, research, learning and video profiles.

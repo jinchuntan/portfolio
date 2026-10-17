@@ -7,7 +7,7 @@ Nigel’s three fields share one purpose: turn complex technical information and
 ## Structure
 
 - `/`: focused introduction and two actions, four selected projects, brief personal context, three recognition highlights, contact.
-- `/work/`: all eight supplied projects. Each opens a native, directly addressable case-study route.
+- `/work/`: all seven public projects. Each opens a native, directly addressable case-study route.
 - `/work/<project>/`: project image, status, problem, Nigel’s contribution, outcome, technologies, evidence links and scope.
 - `/about/`: personal story, career, education, community and PMI contributions.
 - `/recognition/`: complete awards and a native disclosure for credentials. Supplied names and issue dates remain unchanged.
@@ -19,7 +19,7 @@ The persistent navigation is always Work, About, Recognition and Contact. Home l
 
 Warm white, dark green-black and vermilion. Large sans-serif typography, generous spacing, minimal borders and individual project palettes. No loading screen or scroll interception. A small SVG signal path connects chips, research and community. Visitors can send a signal by mouse, touch or keyboard; a short animation and textual outcome respond. The content remains understandable without interacting. Reduced-motion preferences disable animation.
 
-Project visuals distinguish research (uncertainty illustration), semiconductor tooling (actual public dashboard interface with wholly fabricated data), sustainable energy (concept illustration) and collaborative learning (molecule assembly illustration). The supplied portrait gives the personal story a human presence. No illustrative chart is presented as measured research evidence.
+Project visuals distinguish research (uncertainty illustration), procurement (a workflow illustration), sustainable energy (concept illustration) and collaborative learning (molecule assembly illustration). The supplied portrait gives the personal story a human presence. No illustrative chart is presented as measured research evidence.
 
 ## Reference study
 
@@ -33,6 +33,7 @@ These sites informed principles. No layouts, artwork, wording or branding were c
 
 ## Content sources and boundaries
 
-`data/profile.json` is the existing supplied professional record. `assets/project-portfolio.pdf` supports the solar project leadership description. The public APR Dashboard and RoomLab README files were inspected for implemented features and limitations. Springwise’s migrated feature URL and the YSEH initiative listing were checked. Awards and credential dates are supplied records, not independent issuer revalidation. No new publication acceptance is asserted. ConfoSense remains research; the portfolio does not infer production building deployment.
+`data/profile.json` is the existing supplied professional record. `assets/project-portfolio.pdf` supports the solar project leadership description. The public ProcurePilot and RoomLab README files were inspected for implemented features and limitations. Springwise’s migrated feature URL and the YSEH initiative listing were checked. Awards and credential dates are supplied records, not independent issuer revalidation. No new publication acceptance is asserted. ConfoSense remains research; the portfolio does not infer production building deployment.
 
-Employer descriptions remain general. No proprietary chip images, internal report contents, employer path names or real employer measurements are used. The APR visual is captured from public renderer code with identifiers and every numeric value invented for this portfolio.
+
+Only suitable personal, academic and community projects are eligible for publication. Public repository visibility does not authorize employer-work disclosure. Additional profile links are grounded in the original portfolio, the owner’s GitHub profile or the official ICSC page.
