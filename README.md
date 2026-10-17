@@ -1,6 +1,6 @@
 # Nigel Tan · Engineering fieldbook
 
-Personal portfolio for Nigel Tan (Tan Jin Chun), physical design engineer in Kuala Lumpur. Production: https://tanjinchun.me/
+Personal portfolio for Nigel Tan (Tan Jin Chun), physical design engineer in Kuala Lumpur. Production: https://tanjinchun.com
 
 The portfolio connects semiconductor engineering, applied computing research, software prototypes, sustainable energy, and community work through an original editorial design. The reference portfolio informed the ambition, not the source code or visual identity.
 
