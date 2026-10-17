@@ -1,4 +1,10 @@
 {
   "framework": null,
-  "outputDirectory": "."
+  "installCommand": "npm ci --include=dev",
+  "buildCommand": "npm run build:site",
+  "outputDirectory": "dist",
+  "headers": [
+    {"source":"/(.*)","headers":[{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"}]},
+    {"source":"/lib/(.*).mjs","headers":[{"key":"Content-Type","value":"application/javascript; charset=utf-8"}]}
+  ]
 }
