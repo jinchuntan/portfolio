@@ -31,7 +31,7 @@ export function renderProjects() {
     <details class="project-detail"><summary>Inside the project <span aria-hidden="true">+</span></summary><div class="detail-content"><h4>The question</h4><p>${e(p.problem)}</p><h4>The approach</h4><p>${e(p.approach)}</p><h4>What it demonstrates</h4><p>${e(p.outcome)}</p><p class="project-note">${e(p.note)}</p></div></details>
     <div class="project-links">${p.repo?link(p.repo,'Source code'):''}${p.link&&p.link!==p.repo?link(p.link,p.linkLabel):''}</div></div></article>`).join('\n');
 }
-const record = ([title,org,date,category,id], type) => `<li class="record" data-record-category="${e(category)}" data-search="${e([title,org,date,category,id].filter(Boolean).join(' '))}"><div><span class="record-category mono">${e(category)}</span><h4>${e(title)}</h4><p>${e(org)}</p>${id?`<p class="credential-id mono">Credential ID ${e(id)}</p>`:''}</div><span class="record-date mono">${e(date)}</span></li>`;
+const record = ([title,org,date,category,id], type) => `<li class="record" data-record-category="${e(category)}" data-search="${e([title,org,date,category,id,type==='volunteering'&&org==='Project Management Institute'?profile.pmiRoles.join(' '):''].filter(Boolean).join(' '))}"><div><span class="record-category mono">${e(category)}</span><h4>${e(title)}</h4><p>${e(org)}</p>${id?`<p class="credential-id mono">Credential ID ${e(id)}</p>`:''}</div><span class="record-date mono">${e(date)}</span></li>`;
 export function render() {
   let html=readFileSync(path.join(root,'src/template.html'),'utf8');
   const replacements = {

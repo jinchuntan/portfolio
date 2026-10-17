@@ -35,7 +35,7 @@ test('profile renders complete records into the no-JavaScript document',()=>{
   assert.equal(document.querySelectorAll('.project-card').length,profile.projects.length);
   assert.equal(document.querySelectorAll('#achievements .record').length,29);
   assert.equal(document.querySelectorAll('#certifications .record').length,71);
-  assert.equal(document.querySelectorAll('#community-record .record').length,34);
+  assert.equal(document.querySelectorAll('#community-record .record').length,35);
   assert.equal(document.querySelectorAll('.experience-row').length,8);
   assert.equal(document.querySelectorAll('.education-row').length,8);
   assert.ok(!html.includes('Master of Data Science'));
@@ -89,7 +89,7 @@ test('fieldbook search combines category and query, and handles no results and c
   document.querySelector('#record-search').value='no-such-result';fire('#record-search','input');
   assert.equal(document.querySelector('#record-empty').hidden,false);
   fire('#clear-record-search');
-  assert.equal(document.querySelectorAll('.record:not([hidden])').length,134);
+  assert.equal(document.querySelectorAll('.record:not([hidden])').length,135);
   assert.equal(document.querySelector('#record-empty').hidden,true);
 });
 test('global search opens, safely renders matches, and restores a hidden project',()=>{
@@ -130,6 +130,19 @@ test('synthetic illustration has bounded intervals and monotonic outside counts'
   assert.equal(evaluateSignal('bad').halfWidth,.7);
   assert.equal(evaluateSignal(99).halfWidth,1.6);
   assert.ok(evaluateSignal(.7,true).outside>evaluateSignal(.7,false).outside);
+  for(const drift of [false,true]) for(const width of [.2,1.6]) {
+    for(const p of evaluateSignal(width,drift).points) {
+      assert.ok(Math.max(p.upper,p.observed)<28,'upper chart limit');
+      assert.ok(Math.min(p.lower,p.observed)>22,'lower chart limit');
+    }
+  }
+});
+test('PMI contribution roles are searchable and their disclosure opens',()=>{
+  const {document,fire}=setup();
+  document.querySelector('#record-search').value='PMO of the Year';fire('#record-search','input');
+  assert.equal(document.querySelectorAll('.record:not([hidden])').length,1);
+  assert.equal(document.querySelector('.pmi-detail').hidden,false);
+  assert.equal(document.querySelector('.pmi-detail').open,true);
 });
 test('research controls update output, SVG description, and drift state',()=>{
   const {document,fire}=setup();

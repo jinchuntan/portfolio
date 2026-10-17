@@ -68,7 +68,10 @@ function updateRecords() {
     // Keep the group and its filter visible even for an empty category.
     group.querySelector('.record-total').firstChild.textContent = `${visible} `;
     const pmi = group.querySelector('.pmi-detail');
-    if (pmi) pmi.hidden = Boolean(query) || category !== 'All';
+    if (pmi) {
+      pmi.hidden = (Boolean(query) && !matches(pmi.textContent, query)) || (category !== 'All' && category !== 'Leadership');
+      if (query && !pmi.hidden) pmi.open = true;
+    }
   }
   document.querySelector('#record-results').textContent = `${total} matching ${total === 1 ? 'entry' : 'entries'}.`;
   document.querySelector('#record-empty').hidden = total > 0;
