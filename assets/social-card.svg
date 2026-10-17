@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#4a6744" opacity=".2"/></pattern></defs>
+<rect width="1200" height="630" fill="#f4f3ec"/>
+<rect x="720" y="0" width="480" height="630" fill="#e7ebdb"/>
+<rect x="720" y="0" width="480" height="630" fill="url(#dots)"/>
+<path d="M65 98H1135M65 545H1135" stroke="#cad1bf"/>
+<g fill="#26352b"><text x="65" y="67" font-family="Arial,sans-serif" font-size="21" letter-spacing="3">NIGEL TAN</text><text x="65" y="181" font-family="monospace" font-size="13" letter-spacing="1">ENGINEERING / RESEARCH / COMMUNITY</text><text x="60" y="278" font-family="Arial,sans-serif" font-size="82" letter-spacing="-5">From silicon</text><text x="60" y="367" font-family="Arial,sans-serif" font-size="82" letter-spacing="-5">to systems.</text><text x="65" y="462" font-family="Georgia,serif" font-style="italic" font-size="88" letter-spacing="-3">To people.</text><text x="65" y="590" font-family="monospace" font-size="15">tanjinchun.me</text><text x="1135" y="590" text-anchor="end" font-family="monospace" font-size="12">KUALA LUMPUR, MALAYSIA</text></g>
+<g transform="translate(960 275)"><g fill="none" stroke="#729360" opacity=".35"><ellipse rx="174" ry="99" transform="rotate(-30)"/><ellipse rx="174" ry="99" transform="rotate(30)"/><circle r="144" stroke-dasharray="2 7"/></g><path d="M0 -70L115 -4V38L0 104L-115 38V-4Z" fill="#314a33"/><path d="M0 -89L115 -23V19L0 85L-115 19V-23Z" fill="#59754a"/><path d="M0 -107L115 -41V1L0 67L-115 1V-41Z" fill="#8ba873"/><path d="M0 -107L115 -41L0 25L-115 -41Z" fill="#c6e99a" stroke="#729360"/><path d="M0 -88L82 -41L0 7L-82 -41Z" fill="none" stroke="#729360"/><text x="0" y="-25" text-anchor="middle" font-family="Georgia,serif" font-size="40" fill="#314a33">nt.</text></g>
+</svg>
