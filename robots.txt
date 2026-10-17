@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://tanjinchun.me/sitemap.xml
+Sitemap: https://tanjinchun.com/sitemap.xml

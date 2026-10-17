@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>demo_logic / EXAMPLE_20261017 / place (APR)</title>
+<style>
+body { background:#fafafa; color:#333; margin:0; padding:14px 18px 34px;
+       font-family:"Segoe UI",Arial,Helvetica,sans-serif; font-size:13px; }
+h2 { font-size:1.2rem; font-weight:600; margin:0 0 4px; }
+h3 { font-size:0.95rem; font-weight:600; margin:16px 0 6px; }
+p { margin:0 0 7px; }
+a { color:#1d3bbf; }
+nav { font-size:0.8rem; margin:0 0 8px; }
+.note { color:#666; font-size:0.78rem; margin:0 0 8px; }
+.tab-nav { background:#cccccc; border-bottom:1px solid #000; padding:0 10px;
+           display:flex; flex-wrap:wrap; gap:2px; margin-bottom:8px; }
+.tab-btn { background:none; border:none; padding:6px 10px; font-size:0.8rem;
+           font-weight:600; color:#333; cursor:pointer; font-family:inherit; }
+.tab-btn:hover { color:#1535a1; }
+.tab-btn.active { color:#1535a1; border-bottom:3px solid #6c6c6c; }
+.tab-pane { display:none; }
+.tab-pane.active { display:block; }
+.toolbar { margin:0 0 8px; display:flex; gap:6px; }
+.toolbar button { padding:3px 9px; font-size:0.78rem; cursor:pointer;
+                  border:1px solid #ccc; background:#fff; border-radius:3px;
+                  font-family:inherit; }
+.toolbar button:hover { background:#f0f0f0; }
+.scroll { width:100%; overflow-x:auto; background:#fff; border:1px solid #e0e0e0; }
+table { border-collapse:collapse; font-size:0.78em; }
+th, td { border-bottom:1px solid #eee; border-right:1px solid #f2f2f2;
+         padding:2px 6px; white-space:nowrap; text-align:left; }
+th { background:#f4f4f4; font-weight:600; color:#555; border-bottom:2px solid #ddd; }
+td.num { text-align:right; }
+td.bad { color:#b00000; }
+td.ok { color:#0a7a2f; }
+td.na, .na { color:#999; }
+details { margin:8px 0; }
+summary { cursor:pointer; font-weight:600; font-size:0.85rem; }
+img.snap { max-width:100%; border:1px solid #ccc; }
+</style>
+</head>
+<body>
+<nav><a href="../dashboard.html">Project Progress Dashboard</a> / <a href="block_fe59cf492fd9d039d1af592255d4cce6f7015007fd3bd06b8f49a1d232c91666.html">demo_logic</a></nav>
+<h2>demo_logic / EXAMPLE_20261017 / place (APR)</h2>
+<p>APR stage: place<br>Run timestamp: 2026-10-17T09:00:00Z</p>
+<p class="note">Red marks negative slack or a reported violation. Green marks reported non-negative slack or a reported zero. Grey means the value was never submitted, which is not the same as zero or pass. A reported zero does not establish complete signoff coverage.</p>
+<nav class="tab-nav">
+<button class="tab-btn active" onclick="showTab('rec-timing', this)">Timing</button>
+<button class="tab-btn" onclick="showTab('rec-physical', this)">Physical</button>
+<button class="tab-btn" onclick="showTab('rec-timing_drv', this)">Timing DRV</button>
+<button class="tab-btn" onclick="showTab('rec-drc', this)">DRC</button>
+<button class="tab-btn" onclick="showTab('rec-emir', this)">EMIR</button>
+<button class="tab-btn" onclick="showTab('rec-clp', this)">CLP</button>
+<button class="tab-btn" onclick="showTab('rec-log', this)">LOG</button>
+<button class="tab-btn" onclick="showTab('rec-runtime', this)">RUNTIME</button>
+</nav>
+<div class="toolbar"><button onclick="zoomIn()">Zoom in (+)</button><button onclick="zoomOut()">Zoom out (-)</button><button onclick="resetZoom()">Reset zoom</button></div>
+<div id="rec-timing" class="tab-pane active">
+<h3>Timing</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="3">Scenario</th>
+<th colspan="6">Setup</th>
+<th colspan="6">Hold</th>
+</tr><tr>
+<th colspan="3">reg2reg</th>
+<th colspan="3">in2reg</th>
+<th colspan="3">reg2reg</th>
+<th colspan="3">in2reg</th>
+</tr><tr>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+</tr>
+<tr><td>DEMO_SLOW</td><td class="num bad">-0.04</td><td class="num">-0.8</td><td class="num">12</td><td class="num ok">0.02</td><td class="num">0</td><td class="num">0</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+<tr><td>DEMO_FAST</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="num ok">0.03</td><td class="num">0</td><td class="num">0</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+</table>
+</div>
+</div>
+<div id="rec-physical" class="tab-pane">
+<h3>Physical</h3>
+<p class="na">No Physical values were submitted for this record.</p>
+</div>
+<div id="rec-timing_drv" class="tab-pane">
+<h3>Timing DRV</h3>
+<p class="na">No Timing DRV values were submitted for this record.</p>
+</div>
+<div id="rec-drc" class="tab-pane">
+<h3>DRC</h3>
+<p class="na">No DRC values were submitted for this record.</p>
+</div>
+<div id="rec-emir" class="tab-pane">
+<h3>EMIR</h3>
+<p class="na">No EMIR cases were submitted for this record.</p>
+</div>
+<div id="rec-clp" class="tab-pane">
+<h3>CLP</h3>
+<p class="na">No CLP values were submitted for this record.</p>
+</div>
+<div id="rec-log" class="tab-pane">
+<h3>LOG</h3>
+<p class="na">No LOG values were submitted for this record.</p>
+</div>
+<div id="rec-runtime" class="tab-pane">
+<h3>RUNTIME</h3>
+<div class="scroll">
+<table>
+<tr><th>Field</th><th>Value</th></tr>
+<tr><td>Elapsed (s)</td><td class="num">0h 20m 00s</td></tr>
+<tr><td>Peak memory (MiB)</td><td class="na">N/A</td></tr>
+<tr><td>Report</td><td>/fabricated-example/runs/demo_logic/EXAMPLE_20261017/place/runtime.rpt</td></tr>
+</table>
+</div>
+</div>
+<h3>Report references</h3>
+<div class="scroll">
+<table>
+<tr><th>Scenario</th><th>Report path</th></tr>
+<tr><td>DEMO_SLOW</td><td>/fabricated-example/runs/demo_logic/EXAMPLE_20261017/place/timing.rpt</td></tr>
+<tr><td>DEMO_FAST</td><td>/fabricated-example/runs/demo_logic/EXAMPLE_20261017/place/timing.rpt</td></tr>
+</table>
+</div>
+<details><summary>Record details</summary>
+<div class="scroll">
+<table>
+<tr><th>Field</th><th>Value</th></tr>
+<tr><td>Submission id</td><td>cb798d11-5eda-4455-b54f-68bb2bf77ed1</td></tr>
+<tr><td>Schema version</td><td>apr-0.2</td></tr>
+<tr><td>Timing unit</td><td>ns</td></tr>
+<tr><td>Block</td><td>demo_logic</td></tr>
+<tr><td>Run tag</td><td>EXAMPLE_20261017</td></tr>
+<tr><td>Step</td><td>place</td></tr>
+<tr><td>APR stage</td><td>place</td></tr>
+<tr><td>Source</td><td>APR</td></tr>
+<tr><td>Run timestamp (when the run happened)</td><td>2026-10-17T09:00:00Z</td></tr>
+<tr><td>Submitted at (when this record was written)</td><td>2026-10-17T09:51:49.676259Z</td></tr>
+<tr><td>Run path</td><td>/fabricated-example/runs/demo_logic/EXAMPLE_20261017/place</td></tr>
+<tr><td>Log checker file</td><td>/fabricated-example/runs/demo_logic/EXAMPLE_20261017/place/example.log</td></tr>
+<tr><td>Saved file</td><td>/fabricated-example/submissions/cb798d11-5eda-4455-b54f-68bb2bf77ed1.json</td></tr>
+<tr><td>Data origin</td><td>demonstration</td></tr>
+<tr><td>Origin notes</td><td>All identifiers and measurements were invented for a portfolio interface screenshot. No employer design data.</td></tr>
+</table>
+</div>
+</details>
+<h3 id="snapshots">Snapshots</h3>
+<p class="na">No snapshot submitted.</p>
+<script>
+var zoomPercent = 100;
+function applyZoom() {
+  var pane = document.querySelector('.tab-pane.active');
+  if (pane) { pane.style.fontSize = zoomPercent + '%'; }
+}
+function showTab(paneId, button) {
+  var panes = document.querySelectorAll('.tab-pane');
+  for (var i = 0; i < panes.length; i++) { panes[i].className = 'tab-pane'; }
+  var buttons = document.querySelectorAll('.tab-btn');
+  for (var j = 0; j < buttons.length; j++) { buttons[j].className = 'tab-btn'; }
+  document.getElementById(paneId).className = 'tab-pane active';
+  button.className = 'tab-btn active';
+  applyZoom();
+}
+function zoomIn() { if (zoomPercent < 200) { zoomPercent += 10; } applyZoom(); }
+function zoomOut() { if (zoomPercent > 60) { zoomPercent -= 10; } applyZoom(); }
+function resetZoom() { zoomPercent = 100; applyZoom(); }
+</script>
+</body>
+</html>

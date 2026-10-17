@@ -1,12 +1,12 @@
-# Nigel Tan · Engineering fieldbook
+# Nigel Tan · Signals to impact
 
-Personal portfolio for Nigel Tan (Tan Jin Chun), physical design engineer in Kuala Lumpur. Production: https://tanjinchun.com
+Personal portfolio for Nigel Tan (Tan Jin Chun). Canonical production origin: https://tanjinchun.com/.
 
-The portfolio connects semiconductor engineering, applied computing research, software prototypes, sustainable energy, and community work through an original editorial design. The reference portfolio informed the ambition, not the source code or visual identity.
+A concise homepage introduces semiconductor engineering, applied AI research and community leadership. Eight projects have dedicated case studies; career, education, awards, credentials and volunteering live on separate pages.
 
-## Local development
+## Develop and validate
 
-Use Node.js 24 and install the development-only test dependency.
+Use Node.js 24.
 
 ```sh
 npm ci
@@ -16,48 +16,28 @@ npm test
 npm run build:site
 ```
 
-Serve `dist/` with a local static server. The page uses ES modules, so use HTTP rather than opening `index.html` through `file://`. No application backend, account, API key, analytics, or runtime data request is needed. Google Fonts is optional; system font fallbacks are provided.
+The PR workflow also runs Chromium at 1440, 768, 390 and 320 px, checks keyboard and mobile navigation, image loading, overflow, no-JavaScript behavior, reduced motion and axe accessibility rules, and uploads screenshots. Run it locally on a browser-capable host with `npx playwright install chromium` and `npm run test:browser` after packaging. Browser checks use the local `dist/` build and need no Vercel credentials.
 
-## What visitors can do
+Serve `dist/` with an ordinary static HTTP server. There are no runtime dependencies, API keys, analytics requests or external font requests. JavaScript progressively enhances native links with a mobile menu, current-section indicator and optional signal interaction. Reduced motion is respected. Pages and navigation remain usable without JavaScript.
 
-- Switch between engineering, research, and community interests in the chip illustration.
-- Filter eight featured projects and open their question, approach, outcome, and implementation limits.
-- Adjust an interval around a synthetic signal and optionally add sensor drift.
-- Search awards, learning entries, and community roles, with independent category filters.
-- Open portfolio search with the header button, `/`, or Ctrl/Cmd+K. Results reveal their parent section and clear conflicting filters.
-- Copy the contact email, use direct social/contact links, or print the current profile.
+## Content and source
 
-The full content is present in the generated HTML. JavaScript adds controls; native disclosures and links still work without it. Reduced-motion preferences are respected. There is no blocking loading screen.
+- `data/profile.json`: supplied projects and professional record.
+- `src/template.html`, `scripts/build.mjs`: shared document shell and deterministic page generation. Run the build after edits; commit generated HTML, sitemap and robots.txt.
+- `script.js`, `style.css`, `mediaqueries.css`: responsive interface and progressive enhancement.
+- `scripts/project-media.mjs`: original SVG project illustrations; run with Node to regenerate them.
+- `assets/projects/`: distinct project visuals. The dashboard screenshot uses invented values in the real public renderer. Other project diagrams explicitly identify illustration scope.
+- `docs/DESIGN.md`: pre-implementation structure, design principles and content boundaries.
+- `docs/VERIFICATION.md`: verification results and deployment distinction.
 
-## Edit the profile
+Existing PDF and asset URLs are preserved. `scripts/package.mjs` copies an explicit public allowlist to `dist/`, excluding development files and source profile data.
 
-- `data/profile.json` is the structured source for experience, education, projects, awards, community roles, and credentials.
-- `src/template.html` contains the page narrative, section layout, and metadata.
-- `scripts/build.mjs` safely escapes profile text and generates `index.html`.
-- `script.js` implements progressive enhancement. `lib/search.mjs` and `lib/uncertainty.mjs` contain reusable, tested logic.
-- `style.css` and `mediaqueries.css` define the visual system, responsive layouts, print styles, and motion preferences.
-- `assets/social-card.svg` is the editable share-image source; `social-card.png` is the 1200×630 crawler asset. The original portrait remains preserved; `portrait.webp` is its optimized display copy.
+## Hosting and domain
 
-After changing data or the template, run `npm run build` and commit the updated `index.html` too. `npm run check` rejects stale HTML. If the production domain changes, update the canonical/social URLs, structured data, sitemap, and robots file together.
+The existing repository has both a Vercel integration and a GitHub Pages workflow. `vercel.json` remains the hosting build contract: `npm ci --include=dev`, `npm run build:site`, output `dist/`. The Pages workflow validates and deploys the same public output on main pushes.
 
-Issue dates are retained as provided rather than converted into drifting duration labels. Certifications, course certificates, specializations, and registrations retain their supplied titles; a listed issue date does not establish current certification validity. Unknown dates are not guessed. Company names and roles are textual references, not endorsements.
+Canonical links, Open Graph URLs, social images, Person structured data, sitemap, robots.txt and documentation consistently use **https://tanjinchun.com**. There is no committed CNAME or local Vercel project-domain binding. This redesign does not change DNS, Vercel domain assignments, audience or account settings.
 
-## Research and prototype boundaries
+The multi-page site assumes root hosting at the custom domain. For a repository-subpath Pages URL, configure an asset/route base before treating that URL as a production alternative.
 
-The uncertainty notebook uses a deterministic synthetic temperature series. Its interval slider controls a fixed half-width; it does not calibrate a conformal predictor, establish nominal coverage, or reproduce dissertation results. Orange points simply mark observations outside that illustrative interval. Actual research is linked to ConfoSense's evidence index.
-
-Project case notes distinguish working prototypes from future integrations. Quipus sample conversations are fictional, RoomLab's hardware alignment adapters are mocked, and GotongFlow's proof hashes are demonstrations. No proprietary employer chip data is published.
-
-## Deployment
-
-`npm run build:site` regenerates the HTML and packages an explicit public allowlist into `dist/`. It preserves all legacy asset/PDF paths while excluding repository metadata, tests, profile source, templates, and `node_modules`.
-
-- **GitHub Pages:** `.github/workflows/static.yml` validates and packages on pushes to `main` before deploying `dist/` to the existing Pages environment and custom domain.
-- **Vercel:** `vercel.json` retains the framework-free setup, installs the lockfile, builds the static package, and serves `dist/`.
-- **PR checks:** `.github/workflows/validate.yml` runs freshness checks, automated tests, and packaging.
-
-## Verification
-
-The Node test suite uses linkedom to check the generated document and real event handlers, including category/query combinations, hidden-result recovery, literal and accent-insensitive search, clipboard failure, illustration controls, and print-state restoration. It also validates local links and asset paths.
-
-DOM tests do not establish visual layout, native dialog focus behavior, or browser-specific print rendering. Browser visual QA was unavailable in the managed authoring workspace. Review the live page at phone and desktop widths when making visual changes.
+A branch commit, open pull request, merged commit, successful Vercel deployment and verified custom-domain response are separate states. A green build or merged PR alone does not prove that https://tanjinchun.com serves the new version. Verify the deployed page and assets on that exact domain before calling it live.

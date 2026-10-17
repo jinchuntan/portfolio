@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>demo_logic submission history</title>
+<style>
+body { background:#fafafa; color:#333; margin:0; padding:14px 18px 34px;
+       font-family:"Segoe UI",Arial,Helvetica,sans-serif; font-size:13px; }
+h2 { font-size:1.2rem; font-weight:600; margin:0 0 4px; }
+h3 { font-size:0.95rem; font-weight:600; margin:16px 0 6px; }
+p { margin:0 0 7px; }
+a { color:#1d3bbf; }
+nav { font-size:0.8rem; margin:0 0 8px; }
+.note { color:#666; font-size:0.78rem; margin:0 0 8px; }
+.tab-nav { background:#cccccc; border-bottom:1px solid #000; padding:0 10px;
+           display:flex; flex-wrap:wrap; gap:2px; margin-bottom:8px; }
+.tab-btn { background:none; border:none; padding:6px 10px; font-size:0.8rem;
+           font-weight:600; color:#333; cursor:pointer; font-family:inherit; }
+.tab-btn:hover { color:#1535a1; }
+.tab-btn.active { color:#1535a1; border-bottom:3px solid #6c6c6c; }
+.tab-pane { display:none; }
+.tab-pane.active { display:block; }
+.toolbar { margin:0 0 8px; display:flex; gap:6px; }
+.toolbar button { padding:3px 9px; font-size:0.78rem; cursor:pointer;
+                  border:1px solid #ccc; background:#fff; border-radius:3px;
+                  font-family:inherit; }
+.toolbar button:hover { background:#f0f0f0; }
+.scroll { width:100%; overflow-x:auto; background:#fff; border:1px solid #e0e0e0; }
+table { border-collapse:collapse; font-size:0.78em; }
+th, td { border-bottom:1px solid #eee; border-right:1px solid #f2f2f2;
+         padding:2px 6px; white-space:nowrap; text-align:left; }
+th { background:#f4f4f4; font-weight:600; color:#555; border-bottom:2px solid #ddd; }
+td.num { text-align:right; }
+td.bad { color:#b00000; }
+td.ok { color:#0a7a2f; }
+td.na, .na { color:#999; }
+details { margin:8px 0; }
+summary { cursor:pointer; font-weight:600; font-size:0.85rem; }
+img.snap { max-width:100%; border:1px solid #ccc; }
+</style>
+</head>
+<body>
+<nav><a href="../dashboard.html">Project Progress Dashboard</a></nav>
+<h2>demo_logic</h2>
+<p class="note">Submission history. Every saved record is listed separately, including repeated submissions for one stage. Each row shows that record's own values, not the overview's preferred Timing source.</p>
+<p class="note">Each Setup and Hold group shows one reported triple, the one with the lowest WNS. TNS and NVP belong to that same tuple and are never summed across scenarios or path groups.</p>
+<nav class="tab-nav">
+<button class="tab-btn active" onclick="showTab('hist-timing', this)">Timing</button>
+<button class="tab-btn" onclick="showTab('hist-physical', this)">Physical</button>
+<button class="tab-btn" onclick="showTab('hist-timing_drv', this)">Timing DRV</button>
+<button class="tab-btn" onclick="showTab('hist-drc', this)">DRC</button>
+<button class="tab-btn" onclick="showTab('hist-emir', this)">EMIR</button>
+<button class="tab-btn" onclick="showTab('hist-clp', this)">CLP</button>
+<button class="tab-btn" onclick="showTab('hist-log', this)">LOG</button>
+<button class="tab-btn" onclick="showTab('hist-runtime', this)">RUNTIME</button>
+</nav>
+<div class="toolbar"><button onclick="zoomIn()">Zoom in (+)</button><button onclick="zoomOut()">Zoom out (-)</button><button onclick="resetZoom()">Reset zoom</button></div>
+<div id="hist-timing" class="tab-pane active">
+<h3>Timing</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="3">Run tag</th><th rowspan="3">APR stage</th><th rowspan="3">Source</th><th rowspan="3">Step</th><th rowspan="3">Run timestamp</th><th rowspan="3">Runtime</th><th rowspan="3">Linked record</th><th rowspan="3">Timing</th><th rowspan="3">Snapshots</th><th colspan="9">Setup</th><th colspan="9">Hold</th></tr>
+<tr>
+<th colspan="3">Worst group</th>
+<th colspan="3">reg2reg</th>
+<th colspan="3">in2reg</th>
+<th colspan="3">Worst group</th>
+<th colspan="3">reg2reg</th>
+<th colspan="3">in2reg</th>
+</tr><tr>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+<th>WNS (ns)</th>
+<th>TNS (ns)</th>
+<th>NVP</th>
+</tr>
+<tr><td>EXAMPLE_20261017</td><td>place</td><td>APR</td><td>place</td><td>2026-10-17T09:00:00Z</td><td>0h 20m 00s</td><td><span class="na">no matching STA</span></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html">View timing</a></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html#snapshots">Snapshots</a></td><td class="num bad" title="from DEMO_SLOW / reg2reg">-0.04</td><td class="num" title="from DEMO_SLOW / reg2reg">-0.8</td><td class="num" title="from DEMO_SLOW / reg2reg">12</td><td class="num bad" title="from DEMO_SLOW / reg2reg">-0.04</td><td class="num" title="from DEMO_SLOW / reg2reg">-0.8</td><td class="num" title="from DEMO_SLOW / reg2reg">12</td><td class="num ok" title="from DEMO_SLOW / in2reg">0.02</td><td class="num" title="from DEMO_SLOW / in2reg">0</td><td class="num" title="from DEMO_SLOW / in2reg">0</td><td class="num ok" title="from DEMO_FAST / reg2reg">0.03</td><td class="num" title="from DEMO_FAST / reg2reg">0</td><td class="num" title="from DEMO_FAST / reg2reg">0</td><td class="num ok" title="from DEMO_FAST / reg2reg">0.03</td><td class="num" title="from DEMO_FAST / reg2reg">0</td><td class="num" title="from DEMO_FAST / reg2reg">0</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+</table>
+</div>
+</div>
+<div id="hist-physical" class="tab-pane">
+<h3>Physical</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="1">Run tag</th><th rowspan="1">APR stage</th><th rowspan="1">Source</th><th rowspan="1">Step</th><th rowspan="1">Run timestamp</th><th rowspan="1">Runtime</th><th rowspan="1">Linked record</th><th rowspan="1">Timing</th><th rowspan="1">Snapshots</th><th>Core area (um2)</th><th>Cells</th><th>Utilization (%)</th><th>Report</th></tr>
+<tr><td>EXAMPLE_20261017</td><td>place</td><td>APR</td><td>place</td><td>2026-10-17T09:00:00Z</td><td>0h 20m 00s</td><td><span class="na">no matching STA</span></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html">View timing</a></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html#snapshots">Snapshots</a></td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+</table>
+</div>
+<p class="na">No PHYSICAL values were submitted by the shown records.</p>
+</div>
+<div id="hist-timing_drv" class="tab-pane">
+<h3>Timing DRV</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="1">Run tag</th><th rowspan="1">APR stage</th><th rowspan="1">Source</th><th rowspan="1">Step</th><th rowspan="1">Run timestamp</th><th rowspan="1">Runtime</th><th rowspan="1">Linked record</th><th rowspan="1">Timing</th><th rowspan="1">Snapshots</th><th>Scenario</th><th>Max transition slack (ns)</th><th>Max capacitance slack (pF)</th><th>Min pulse width slack (ns)</th><th>Min period slack (ns)</th><th>Report</th></tr>
+<tr><td>EXAMPLE_20261017</td><td>place</td><td>APR</td><td>place</td><td>2026-10-17T09:00:00Z</td><td>0h 20m 00s</td><td><span class="na">no matching STA</span></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html">View timing</a></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html#snapshots">Snapshots</a></td><td class="na">no scenario reported</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+</table>
+</div>
+</div>
+<div id="hist-drc" class="tab-pane">
+<h3>DRC</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="1">Run tag</th><th rowspan="1">APR stage</th><th rowspan="1">Source</th><th rowspan="1">Step</th><th rowspan="1">Run timestamp</th><th rowspan="1">Runtime</th><th rowspan="1">Linked record</th><th rowspan="1">Timing</th><th rowspan="1">Snapshots</th><th>DRC violations</th><th>Report</th></tr>
+<tr><td>EXAMPLE_20261017</td><td>place</td><td>APR</td><td>place</td><td>2026-10-17T09:00:00Z</td><td>0h 20m 00s</td><td><span class="na">no matching STA</span></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html">View timing</a></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html#snapshots">Snapshots</a></td><td class="na">N/A</td><td class="na">N/A</td></tr>
+</table>
+</div>
+<p class="na">No DRC values were submitted by the shown records.</p>
+</div>
+<div id="hist-emir" class="tab-pane">
+<h3>EMIR</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="1">Run tag</th><th rowspan="1">APR stage</th><th rowspan="1">Source</th><th rowspan="1">Step</th><th rowspan="1">Run timestamp</th><th rowspan="1">Runtime</th><th rowspan="1">Linked record</th><th rowspan="1">Timing</th><th rowspan="1">Snapshots</th><th>Case</th><th>Analysis mode</th><th>Activity source</th><th>Power net</th><th>Power domain</th><th>Nominal voltage (V)</th><th>Worst IR drop (mV)</th><th>IR drop limit (mV)</th><th>IR violations</th><th>EM violations</th><th>Report</th></tr>
+<tr><td>EXAMPLE_20261017</td><td>place</td><td>APR</td><td>place</td><td>2026-10-17T09:00:00Z</td><td>0h 20m 00s</td><td><span class="na">no matching STA</span></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html">View timing</a></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html#snapshots">Snapshots</a></td><td class="na">no case reported</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+</table>
+</div>
+<p class="na">No EMIR cases were submitted by the shown records.</p>
+</div>
+<div id="hist-clp" class="tab-pane">
+<h3>CLP</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="1">Run tag</th><th rowspan="1">APR stage</th><th rowspan="1">Source</th><th rowspan="1">Step</th><th rowspan="1">Run timestamp</th><th rowspan="1">Runtime</th><th rowspan="1">Linked record</th><th rowspan="1">Timing</th><th rowspan="1">Snapshots</th><th>CLP errors</th><th>CLP warnings</th><th>CLP waived</th><th>Report</th></tr>
+<tr><td>EXAMPLE_20261017</td><td>place</td><td>APR</td><td>place</td><td>2026-10-17T09:00:00Z</td><td>0h 20m 00s</td><td><span class="na">no matching STA</span></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html">View timing</a></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html#snapshots">Snapshots</a></td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+</table>
+</div>
+<p class="na">No CLP values were submitted by the shown records.</p>
+</div>
+<div id="hist-log" class="tab-pane">
+<h3>LOG</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="1">Run tag</th><th rowspan="1">APR stage</th><th rowspan="1">Source</th><th rowspan="1">Step</th><th rowspan="1">Run timestamp</th><th rowspan="1">Runtime</th><th rowspan="1">Linked record</th><th rowspan="1">Timing</th><th rowspan="1">Snapshots</th><th>Log errors</th><th>Log warnings</th><th>Report</th></tr>
+<tr><td>EXAMPLE_20261017</td><td>place</td><td>APR</td><td>place</td><td>2026-10-17T09:00:00Z</td><td>0h 20m 00s</td><td><span class="na">no matching STA</span></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html">View timing</a></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html#snapshots">Snapshots</a></td><td class="na">N/A</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+</table>
+</div>
+<p class="na">No LOG values were submitted by the shown records.</p>
+</div>
+<div id="hist-runtime" class="tab-pane">
+<h3>RUNTIME</h3>
+<div class="scroll">
+<table>
+<tr><th rowspan="1">Run tag</th><th rowspan="1">APR stage</th><th rowspan="1">Source</th><th rowspan="1">Step</th><th rowspan="1">Run timestamp</th><th rowspan="1">Runtime</th><th rowspan="1">Linked record</th><th rowspan="1">Timing</th><th rowspan="1">Snapshots</th><th>Elapsed (s)</th><th>Peak memory (MiB)</th><th>Report</th></tr>
+<tr><td>EXAMPLE_20261017</td><td>place</td><td>APR</td><td>place</td><td>2026-10-17T09:00:00Z</td><td>0h 20m 00s</td><td><span class="na">no matching STA</span></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html">View timing</a></td><td><a href="record_99e14d7b1321f85b556703c93874bea7e00ed573efa0c837378ce40ee0dc7d87.html#snapshots">Snapshots</a></td><td class="num">0h 20m 00s</td><td class="na">N/A</td><td><span title="/fabricated-example/runs/demo_logic/EXAMPLE_20261017/place/runtime.rpt">report</span></td></tr>
+</table>
+</div>
+</div>
+<script>
+var zoomPercent = 100;
+function applyZoom() {
+  var pane = document.querySelector('.tab-pane.active');
+  if (pane) { pane.style.fontSize = zoomPercent + '%'; }
+}
+function showTab(paneId, button) {
+  var panes = document.querySelectorAll('.tab-pane');
+  for (var i = 0; i < panes.length; i++) { panes[i].className = 'tab-pane'; }
+  var buttons = document.querySelectorAll('.tab-btn');
+  for (var j = 0; j < buttons.length; j++) { buttons[j].className = 'tab-btn'; }
+  document.getElementById(paneId).className = 'tab-pane active';
+  button.className = 'tab-btn active';
+  applyZoom();
+}
+function zoomIn() { if (zoomPercent < 200) { zoomPercent += 10; } applyZoom(); }
+function zoomOut() { if (zoomPercent > 60) { zoomPercent -= 10; } applyZoom(); }
+function resetZoom() { zoomPercent = 100; applyZoom(); }
+</script>
+</body>
+</html>
